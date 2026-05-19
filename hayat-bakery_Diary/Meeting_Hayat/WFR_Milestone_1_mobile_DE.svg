@@ -1,0 +1,344 @@
+<svg viewBox="0 0 360 2300" xmlns="http://www.w3.org/2000/svg" font-family="ui-sans-serif, system-ui, sans-serif">
+
+  <rect width="360" height="2300" fill="#f5f5f4"/>
+  <rect x="20" y="20" width="320" height="2260" rx="32" fill="#ffffff" stroke="#d4d4d4" stroke-width="1.5"/>
+
+  <!-- status bar -->
+  <rect x="20" y="20" width="320" height="28" rx="32" fill="#fafaf9"/>
+  <rect x="20" y="36" width="320" height="12" fill="#fafaf9"/>
+  <text x="44" y="38" font-size="9" fill="#78716c">9:41</text>
+  <text x="296" y="38" font-size="9" fill="#78716c" text-anchor="end">●●●  WiFi  ▮</text>
+
+  <!-- HERO FISSO -->
+  <rect x="20" y="48" width="320" height="4" fill="#1c1917"/>
+  <rect x="20" y="48" width="320" height="100" fill="#fafaf9" stroke="#e7e5e4" stroke-width="0.5"/>
+  <rect x="24" y="52" width="52" height="14" rx="3" fill="#1c1917"/>
+  <text x="50" y="62" font-size="8" font-weight="500" fill="#ffffff" text-anchor="middle">FEST ↕</text>
+  <rect x="32" y="68" width="40" height="40" rx="8" fill="#ffffff" stroke="#d4d4d4" stroke-width="0.5"/>
+  <text x="52" y="92" font-size="16" fill="#a8a29e" text-anchor="middle">🏪</text>
+  <text x="80" y="82" font-size="12" font-weight="500" fill="#1c1917">Hayat Bäckerei</text>
+  <text x="80" y="95" font-size="9" fill="#78716c">Türkische Spezialitäten · Wiesbaden</text>
+  <text x="80" y="107" font-size="8" fill="#a8a29e">Mo–Sa 08:00–20:00</text>
+  <rect x="220" y="62" width="56" height="18" rx="9" fill="#1c1917"/>
+  <text x="248" y="75" font-size="8" font-weight="500" fill="#ffffff" text-anchor="middle">🌐 DE ▾</text>
+  <rect x="220" y="84" width="56" height="16" rx="4" fill="#ffffff" stroke="#d4d4d4" stroke-width="0.5"/>
+  <text x="248" y="95" font-size="8" fill="#a8a29e" text-anchor="middle">☀️ · 🌙 · auto</text>
+  <rect x="280" y="62" width="52" height="18" rx="6" fill="#ffffff" stroke="#d4d4d4" stroke-width="0.5"/>
+  <text x="296" y="75" font-size="9" fill="#44403c">🔑</text>
+  <line x1="310" y1="64" x2="310" y2="78" stroke="#e7e5e4" stroke-width="0.5"/>
+  <text x="318" y="75" font-size="8" fill="#a8a29e">▾</text>
+  <rect x="280" y="84" width="52" height="22" rx="6" fill="#fafaf9" stroke="#fde047" stroke-width="0.5" stroke-dasharray="3,2"/>
+  <text x="299" y="98" font-size="11" fill="#d4d4d4" text-anchor="middle">🛒</text>
+  <rect x="286" y="82" width="14" height="10" rx="3" fill="#fef9c3" stroke="#fde047" stroke-width="0.5"/>
+  <text x="293" y="90" font-size="7" fill="#854d0e" text-anchor="middle">M2</text>
+  <text x="320" y="98" font-size="7" fill="#a8a29e" text-anchor="middle">nur</text>
+  <text x="320" y="107" font-size="7" fill="#a8a29e" text-anchor="middle">Login</text>
+  <text x="22" y="156" font-size="8" fill="#a8a29e">① Geschäft  ② Sprache  ③ Design  ④ Login + Warenkorb [M2]</text>
+
+  <!-- EINGELOGGTER ZUSTAND -->
+  <rect x="20" y="164" width="320" height="14" fill="#f5f5f4"/>
+  <text x="32" y="175" font-size="9" font-weight="500" fill="#a8a29e" letter-spacing="0.06em">HERO — EINGELOGGT (Avatar + Menü)</text>
+  <rect x="20" y="178" width="320" height="180" fill="#ffffff" stroke="#e7e5e4" stroke-width="0.5"/>
+  <text x="32" y="200" font-size="10" font-weight="500" fill="#44403c">ComboButton eingeloggt:</text>
+  <rect x="32" y="206" width="60" height="22" rx="6" fill="#ffffff" stroke="#d4d4d4" stroke-width="0.5"/>
+  <circle cx="46" cy="217" r="8" fill="#1c1917"/>
+  <text x="46" y="221" font-size="8" font-weight="500" fill="#ffffff" text-anchor="middle">AD</text>
+  <line x1="58" y1="208" x2="58" y2="226" stroke="#e7e5e4" stroke-width="0.5"/>
+  <text x="66" y="221" font-size="9" fill="#44403c">▾</text>
+  <text x="100" y="214" font-size="9" fill="#78716c">← Initialen</text>
+  <text x="100" y="226" font-size="8" fill="#a8a29e">oder Foto / Robohash / DiceBear</text>
+  <text x="32" y="248" font-size="10" font-weight="500" fill="#44403c">Kontextmenü (Klick auf ▾):</text>
+  <rect x="32" y="254" width="180" height="96" rx="8" fill="#ffffff" stroke="#d4d4d4" stroke-width="1"/>
+  <rect x="32" y="254" width="180" height="28" rx="8" fill="#f5f5f4"/>
+  <rect x="32" y="270" width="180" height="12" fill="#f5f5f4"/>
+  <text x="52" y="266" font-size="9" font-weight="500" fill="#44403c">@benutzername</text>
+  <text x="52" y="278" font-size="8" fill="#a8a29e">mail@beispiel.de</text>
+  <line x1="32" y1="284" x2="212" y2="284" stroke="#e7e5e4" stroke-width="0.5"/>
+  <text x="44" y="295" font-size="9" fill="#44403c">👤  Mein Profil</text>
+  <text x="44" y="308" font-size="9" fill="#44403c">🛒  Meine Bestellungen</text>
+  <rect x="162" y="301" width="22" height="10" rx="3" fill="#fef9c3" stroke="#fde047" stroke-width="0.5"/>
+  <text x="173" y="309" font-size="7" fill="#854d0e" text-anchor="middle">M2</text>
+  <text x="44" y="321" font-size="9" fill="#44403c">🎂  Meine Torten</text>
+  <line x1="32" y1="326" x2="212" y2="326" stroke="#e7e5e4" stroke-width="0.5"/>
+  <text x="44" y="337" font-size="9" fill="#44403c">🌐  Sprache</text>
+  <text x="44" y="350" font-size="9" fill="#e57373">🚪  Abmelden</text>
+  <text x="225" y="262" font-size="9" font-weight="500" fill="#44403c">Avatar-Optionen:</text>
+  <circle cx="235" cy="280" r="10" fill="#1c1917"/>
+  <text x="235" y="284" font-size="8" font-weight="500" fill="#ffffff" text-anchor="middle">AD</text>
+  <text x="248" y="284" font-size="8" fill="#78716c">Initialen</text>
+  <circle cx="235" cy="306" r="10" fill="#e0f2fe" stroke="#bae6fd" stroke-width="0.5"/>
+  <text x="235" y="310" font-size="10" text-anchor="middle">📷</text>
+  <text x="248" y="310" font-size="8" fill="#78716c">Foto</text>
+  <circle cx="235" cy="332" r="10" fill="#f0fdf4" stroke="#bbf7d0" stroke-width="0.5"/>
+  <text x="235" y="336" font-size="10" text-anchor="middle">🤖</text>
+  <text x="248" y="336" font-size="8" fill="#78716c">Robohash</text>
+  <circle cx="235" cy="352" r="10" fill="#fef9c3" stroke="#fde047" stroke-width="0.5"/>
+  <text x="235" y="356" font-size="10" text-anchor="middle">🎨</text>
+  <text x="248" y="356" font-size="8" fill="#78716c">DiceBear</text>
+
+  <!-- SPEISEKARTE -->
+  <rect x="20" y="358" width="320" height="14" fill="#f5f5f4"/>
+  <text x="32" y="369" font-size="9" font-weight="500" fill="#a8a29e" letter-spacing="0.06em">SPEISEKARTE</text>
+
+  <!-- SÜSSSPEISEN -->
+  <rect x="20" y="372" width="320" height="100" fill="#ffffff" stroke="#e7e5e4" stroke-width="0.5"/>
+  <text x="32" y="388" font-size="10" font-weight="500" fill="#44403c">Süßspeisen</text>
+  <text x="296" y="388" font-size="9" fill="#a8a29e" text-anchor="end">wischen →</text>
+  <rect x="32" y="393" width="72" height="70" rx="8" fill="#fafaf9" stroke="#e7e5e4" stroke-width="0.5"/>
+  <rect x="32" y="393" width="72" height="36" rx="8" fill="#f0fdf4"/>
+  <rect x="32" y="417" width="72" height="12" fill="#f0fdf4"/>
+  <text x="68" y="414" font-size="14" text-anchor="middle" fill="#86efac">★</text>
+  <text x="68" y="434" font-size="8" font-weight="500" fill="#44403c" text-anchor="middle">Baklava Pist.</text>
+  <text x="68" y="444" font-size="7" fill="#78716c" text-anchor="middle">3,50 € / 100g</text>
+  <rect x="38" y="447" width="60" height="12" rx="3" fill="#ffffff" stroke="#d4d4d4" stroke-width="0.5" stroke-dasharray="3,2"/>
+  <text x="68" y="456" font-size="7" fill="#a8a29e" text-anchor="middle">Bestellen [M2]</text>
+  <rect x="112" y="393" width="72" height="70" rx="8" fill="#fafaf9" stroke="#e7e5e4" stroke-width="0.5"/>
+  <rect x="112" y="393" width="72" height="36" rx="8" fill="#f0fdf4"/>
+  <rect x="112" y="417" width="72" height="12" fill="#f0fdf4"/>
+  <text x="148" y="414" font-size="14" text-anchor="middle" fill="#86efac">★</text>
+  <text x="148" y="434" font-size="8" font-weight="500" fill="#44403c" text-anchor="middle">Kadayıf Rolle</text>
+  <text x="148" y="444" font-size="7" fill="#78716c" text-anchor="middle">3,50 € / 100g</text>
+  <rect x="118" y="447" width="60" height="12" rx="3" fill="#ffffff" stroke="#d4d4d4" stroke-width="0.5" stroke-dasharray="3,2"/>
+  <text x="148" y="456" font-size="7" fill="#a8a29e" text-anchor="middle">Bestellen [M2]</text>
+  <rect x="192" y="393" width="72" height="70" rx="8" fill="#fafaf9" stroke="#e7e5e4" stroke-width="0.5"/>
+  <rect x="192" y="393" width="72" height="36" rx="8" fill="#f0fdf4"/>
+  <rect x="192" y="417" width="72" height="12" fill="#f0fdf4"/>
+  <text x="228" y="414" font-size="14" text-anchor="middle" fill="#86efac">★</text>
+  <text x="228" y="434" font-size="8" font-weight="500" fill="#44403c" text-anchor="middle">Trilece</text>
+  <text x="228" y="444" font-size="7" fill="#78716c" text-anchor="middle">4,00 € / Stück</text>
+  <rect x="198" y="447" width="60" height="12" rx="3" fill="#ffffff" stroke="#d4d4d4" stroke-width="0.5" stroke-dasharray="3,2"/>
+  <text x="228" y="456" font-size="7" fill="#a8a29e" text-anchor="middle">Bestellen [M2]</text>
+  <text x="300" y="433" font-size="18" fill="#e7e5e4" text-anchor="middle">›</text>
+
+  <!-- FRÜHSTÜCK -->
+  <rect x="20" y="472" width="320" height="100" fill="#ffffff" stroke="#e7e5e4" stroke-width="0.5"/>
+  <text x="32" y="488" font-size="10" font-weight="500" fill="#44403c">Frühstück &amp; Klassiker</text>
+  <text x="296" y="488" font-size="9" fill="#a8a29e" text-anchor="end">wischen →</text>
+  <rect x="32" y="493" width="72" height="70" rx="8" fill="#fafaf9" stroke="#e7e5e4" stroke-width="0.5"/>
+  <rect x="32" y="493" width="72" height="36" rx="8" fill="#fefce8"/>
+  <rect x="32" y="517" width="72" height="12" fill="#fefce8"/>
+  <text x="68" y="514" font-size="14" text-anchor="middle" fill="#fde047">☕</text>
+  <text x="68" y="534" font-size="8" font-weight="500" fill="#44403c" text-anchor="middle">Frühstück Set</text>
+  <text x="68" y="544" font-size="7" fill="#78716c" text-anchor="middle">10,00 € / Pers.</text>
+  <rect x="38" y="547" width="60" height="12" rx="3" fill="#ffffff" stroke="#d4d4d4" stroke-width="0.5" stroke-dasharray="3,2"/>
+  <text x="68" y="556" font-size="7" fill="#a8a29e" text-anchor="middle">Bestellen [M2]</text>
+  <rect x="112" y="493" width="72" height="70" rx="8" fill="#fafaf9" stroke="#e7e5e4" stroke-width="0.5"/>
+  <rect x="112" y="493" width="72" height="36" rx="8" fill="#fefce8"/>
+  <rect x="112" y="517" width="72" height="12" fill="#fefce8"/>
+  <text x="148" y="514" font-size="14" text-anchor="middle" fill="#fde047">🥐</text>
+  <text x="148" y="534" font-size="8" font-weight="500" fill="#44403c" text-anchor="middle">Simit</text>
+  <text x="148" y="544" font-size="7" fill="#78716c" text-anchor="middle">1,40 € / Stück</text>
+  <rect x="118" y="547" width="60" height="12" rx="3" fill="#ffffff" stroke="#d4d4d4" stroke-width="0.5" stroke-dasharray="3,2"/>
+  <text x="148" y="556" font-size="7" fill="#a8a29e" text-anchor="middle">Bestellen [M2]</text>
+  <rect x="192" y="493" width="72" height="70" rx="8" fill="#fafaf9" stroke="#e7e5e4" stroke-width="0.5"/>
+  <rect x="192" y="493" width="72" height="36" rx="8" fill="#fefce8"/>
+  <rect x="192" y="517" width="72" height="12" fill="#fefce8"/>
+  <text x="228" y="514" font-size="14" text-anchor="middle" fill="#fde047">🥙</text>
+  <text x="228" y="534" font-size="8" font-weight="500" fill="#44403c" text-anchor="middle">Börek</text>
+  <text x="228" y="544" font-size="7" fill="#e57373" text-anchor="middle">⚠ Preis fehlt</text>
+  <rect x="198" y="547" width="60" height="12" rx="3" fill="#ffffff" stroke="#d4d4d4" stroke-width="0.5" stroke-dasharray="3,2"/>
+  <text x="228" y="556" font-size="7" fill="#a8a29e" text-anchor="middle">Bestellen [M2]</text>
+  <text x="300" y="533" font-size="18" fill="#e7e5e4" text-anchor="middle">›</text>
+
+  <!-- HERZHAFTE -->
+  <rect x="20" y="572" width="320" height="100" fill="#ffffff" stroke="#e7e5e4" stroke-width="0.5"/>
+  <text x="32" y="588" font-size="10" font-weight="500" fill="#44403c">Herzhafte Spezialitäten</text>
+  <text x="296" y="588" font-size="9" fill="#a8a29e" text-anchor="end">wischen →</text>
+  <rect x="32" y="593" width="72" height="70" rx="8" fill="#fafaf9" stroke="#e7e5e4" stroke-width="0.5"/>
+  <rect x="32" y="593" width="72" height="36" rx="8" fill="#fef2f2"/>
+  <rect x="32" y="617" width="72" height="12" fill="#fef2f2"/>
+  <text x="68" y="614" font-size="14" text-anchor="middle" fill="#fca5a5">🍖</text>
+  <text x="68" y="634" font-size="8" font-weight="500" fill="#44403c" text-anchor="middle">Kabuli Palau</text>
+  <text x="68" y="644" font-size="7" fill="#78716c" text-anchor="middle">10,00 €</text>
+  <rect x="38" y="647" width="60" height="12" rx="3" fill="#ffffff" stroke="#d4d4d4" stroke-width="0.5" stroke-dasharray="3,2"/>
+  <text x="68" y="656" font-size="7" fill="#a8a29e" text-anchor="middle">Bestellen [M2]</text>
+  <rect x="112" y="593" width="72" height="70" rx="8" fill="#fafaf9" stroke="#e7e5e4" stroke-width="0.5"/>
+  <rect x="112" y="593" width="72" height="36" rx="8" fill="#fef2f2"/>
+  <rect x="112" y="617" width="72" height="12" fill="#fef2f2"/>
+  <text x="148" y="614" font-size="14" text-anchor="middle" fill="#fca5a5">🥟</text>
+  <text x="148" y="634" font-size="8" font-weight="500" fill="#44403c" text-anchor="middle">Samosa</text>
+  <text x="148" y="644" font-size="7" fill="#78716c" text-anchor="middle">3,00 € / Stück</text>
+  <rect x="118" y="647" width="60" height="12" rx="3" fill="#ffffff" stroke="#d4d4d4" stroke-width="0.5" stroke-dasharray="3,2"/>
+  <text x="148" y="656" font-size="7" fill="#a8a29e" text-anchor="middle">Bestellen [M2]</text>
+  <text x="300" y="633" font-size="18" fill="#e7e5e4" text-anchor="middle">›</text>
+
+  <!-- GETRÄNKE -->
+  <rect x="20" y="672" width="320" height="100" fill="#ffffff" stroke="#e7e5e4" stroke-width="0.5"/>
+  <text x="32" y="688" font-size="10" font-weight="500" fill="#44403c">Getränke &amp; Heißgetränke</text>
+  <text x="296" y="688" font-size="9" fill="#a8a29e" text-anchor="end">wischen →</text>
+  <rect x="32" y="693" width="72" height="70" rx="8" fill="#fafaf9" stroke="#e7e5e4" stroke-width="0.5"/>
+  <rect x="32" y="693" width="72" height="36" rx="8" fill="#eff6ff"/>
+  <rect x="32" y="717" width="72" height="12" fill="#eff6ff"/>
+  <text x="68" y="714" font-size="14" text-anchor="middle" fill="#93c5fd">☕</text>
+  <text x="68" y="734" font-size="8" font-weight="500" fill="#44403c" text-anchor="middle">Türk. Mokka</text>
+  <text x="68" y="744" font-size="7" fill="#78716c" text-anchor="middle">4,50 €</text>
+  <rect x="38" y="747" width="60" height="12" rx="3" fill="#ffffff" stroke="#d4d4d4" stroke-width="0.5" stroke-dasharray="3,2"/>
+  <text x="68" y="756" font-size="7" fill="#a8a29e" text-anchor="middle">Bestellen [M2]</text>
+  <rect x="112" y="693" width="72" height="70" rx="8" fill="#fafaf9" stroke="#e7e5e4" stroke-width="0.5"/>
+  <rect x="112" y="693" width="72" height="36" rx="8" fill="#eff6ff"/>
+  <rect x="112" y="717" width="72" height="12" fill="#eff6ff"/>
+  <text x="148" y="714" font-size="14" text-anchor="middle" fill="#93c5fd">☕</text>
+  <text x="148" y="734" font-size="8" font-weight="500" fill="#44403c" text-anchor="middle">Cappuccino</text>
+  <text x="148" y="744" font-size="7" fill="#78716c" text-anchor="middle">3,00 €</text>
+  <rect x="118" y="747" width="60" height="12" rx="3" fill="#ffffff" stroke="#d4d4d4" stroke-width="0.5" stroke-dasharray="3,2"/>
+  <text x="148" y="756" font-size="7" fill="#a8a29e" text-anchor="middle">Bestellen [M2]</text>
+  <text x="300" y="733" font-size="18" fill="#e7e5e4" text-anchor="middle">›</text>
+
+  <!-- TORTE ANFRAGEN -->
+  <rect x="20" y="772" width="320" height="14" fill="#f5f5f4"/>
+  <text x="32" y="783" font-size="9" font-weight="500" fill="#a8a29e" letter-spacing="0.06em">TORTE ANFRAGEN</text>
+  <rect x="20" y="786" width="320" height="192" fill="#ffffff" stroke="#e7e5e4" stroke-width="0.5"/>
+  <text x="296" y="803" font-size="9" fill="#a8a29e" text-anchor="end">wischen →</text>
+  <rect x="32" y="792" width="142" height="178" rx="10" fill="#fafaf9" stroke="#e7e5e4" stroke-width="0.5"/>
+  <text x="44" y="810" font-size="10" font-weight="500" fill="#44403c">🎂 Torte bestellen</text>
+  <rect x="40" y="816" width="126" height="15" rx="4" fill="#ffffff" stroke="#e7e5e4" stroke-width="0.5"/>
+  <text x="103" y="827" font-size="8" fill="#a8a29e" text-anchor="middle">Tortenform</text>
+  <rect x="40" y="835" width="126" height="15" rx="4" fill="#ffffff" stroke="#e7e5e4" stroke-width="0.5"/>
+  <text x="103" y="846" font-size="8" fill="#a8a29e" text-anchor="middle">Größe (15/20/30 cm)</text>
+  <rect x="40" y="854" width="126" height="15" rx="4" fill="#ffffff" stroke="#e7e5e4" stroke-width="0.5"/>
+  <text x="103" y="865" font-size="8" fill="#a8a29e" text-anchor="middle">Geschmack / Motiv</text>
+  <rect x="40" y="873" width="126" height="15" rx="4" fill="#ffffff" stroke="#e7e5e4" stroke-width="0.5"/>
+  <text x="103" y="884" font-size="8" fill="#a8a29e" text-anchor="middle">Lieferdatum</text>
+  <rect x="40" y="892" width="126" height="15" rx="4" fill="#ffffff" stroke="#e7e5e4" stroke-width="0.5"/>
+  <text x="103" y="903" font-size="8" fill="#a8a29e" text-anchor="middle">Telefonnummer</text>
+  <rect x="40" y="911" width="126" height="15" rx="4" fill="#ffffff" stroke="#e7e5e4" stroke-width="0.5"/>
+  <text x="103" y="922" font-size="8" fill="#a8a29e" text-anchor="middle">Anmerkungen</text>
+  <rect x="40" y="930" width="126" height="28" rx="6" fill="#1c1917"/>
+  <text x="103" y="948" font-size="9" font-weight="500" fill="#ffffff" text-anchor="middle">Anfrage absenden →</text>
+  <rect x="182" y="792" width="146" height="178" rx="10" fill="#fafaf9" stroke="#d4d4d4" stroke-width="0.5" stroke-dasharray="4,3"/>
+  <text x="194" y="810" font-size="10" font-weight="500" fill="#a8a29e">✨ KI-Generator</text>
+  <rect x="194" y="814" width="36" height="14" rx="4" fill="#fef9c3" stroke="#fde047" stroke-width="0.5"/>
+  <text x="212" y="824" font-size="7" fill="#854d0e" text-anchor="middle">M3</text>
+  <rect x="194" y="832" width="126" height="82" rx="8" fill="#f5f5f4" stroke="#e7e5e4" stroke-width="0.5"/>
+  <text x="257" y="877" font-size="26" text-anchor="middle" fill="#d4d4d4">🎂</text>
+  <text x="257" y="896" font-size="8" fill="#a8a29e" text-anchor="middle">KI-Vorschau</text>
+  <rect x="194" y="930" width="126" height="28" rx="6" fill="#f5f5f4" stroke="#e7e5e4" stroke-width="0.5"/>
+  <text x="257" y="948" font-size="9" fill="#a8a29e" text-anchor="middle">Demnächst verfügbar</text>
+
+  <!-- ÜBER UNS -->
+  <rect x="20" y="978" width="320" height="14" fill="#f5f5f4"/>
+  <text x="32" y="989" font-size="9" font-weight="500" fill="#a8a29e" letter-spacing="0.06em">ÜBER UNS</text>
+  <rect x="20" y="992" width="320" height="80" fill="#ffffff" stroke="#e7e5e4" stroke-width="0.5"/>
+  <rect x="32" y="1004" width="56" height="56" rx="8" fill="#f5f5f4" stroke="#e7e5e4" stroke-width="0.5"/>
+  <text x="60" y="1036" font-size="26" text-anchor="middle" fill="#d4d4d4">👨‍🍳</text>
+  <text x="98" y="1020" font-size="10" font-weight="500" fill="#44403c">Türkische Konditorei</text>
+  <text x="98" y="1034" font-size="9" fill="#78716c">Hausgemachtes Baklava, türkisches</text>
+  <text x="98" y="1046" font-size="9" fill="#78716c">Frühstück und täglich frische</text>
+  <text x="98" y="1058" font-size="9" fill="#78716c">Spezialitäten in Wiesbaden.</text>
+
+  <!-- ANFAHRT -->
+  <rect x="20" y="1072" width="320" height="14" fill="#f5f5f4"/>
+  <text x="32" y="1083" font-size="9" font-weight="500" fill="#a8a29e" letter-spacing="0.06em">ANFAHRT</text>
+  <rect x="20" y="1086" width="320" height="76" fill="#ffffff" stroke="#e7e5e4" stroke-width="0.5"/>
+  <circle cx="44" cy="1108" r="9" fill="#f5f5f4" stroke="#e7e5e4" stroke-width="0.5"/>
+  <text x="44" y="1112" font-size="9" font-weight="500" fill="#44403c" text-anchor="middle">1</text>
+  <text x="60" y="1106" font-size="10" font-weight="500" fill="#44403c">Adresse</text>
+  <text x="60" y="1120" font-size="9" fill="#78716c">Musterstraße 12, 65183 Wiesbaden</text>
+  <rect x="60" y="1130" width="106" height="20" rx="5" fill="#ffffff" stroke="#d4d4d4" stroke-width="0.5"/>
+  <text x="113" y="1143" font-size="8" fill="#44403c" text-anchor="middle">📍 Navigation starten →</text>
+  <rect x="20" y="1162" width="320" height="104" fill="#ffffff" stroke="#e7e5e4" stroke-width="0.5"/>
+  <circle cx="44" cy="1182" r="9" fill="#f5f5f4" stroke="#e7e5e4" stroke-width="0.5"/>
+  <text x="44" y="1186" font-size="9" font-weight="500" fill="#44403c" text-anchor="middle">2</text>
+  <text x="60" y="1180" font-size="10" font-weight="500" fill="#44403c">Karte</text>
+  <rect x="60" y="1188" width="256" height="58" rx="8" fill="#e0f2fe" stroke="#bae6fd" stroke-width="0.5"/>
+  <text x="188" y="1213" font-size="10" fill="#0369a1" text-anchor="middle">📍 Google Maps</text>
+  <text x="188" y="1227" font-size="8" fill="#0369a1" text-anchor="middle">Navigation vom aktuellen Standort</text>
+  <rect x="60" y="1250" width="126" height="20" rx="5" fill="#ffffff" stroke="#d4d4d4" stroke-width="0.5"/>
+  <text x="123" y="1263" font-size="8" fill="#44403c" text-anchor="middle">✓ Ich bin angekommen!</text>
+  <rect x="20" y="1266" width="320" height="74" fill="#ffffff" stroke="#e7e5e4" stroke-width="0.5"/>
+  <circle cx="44" cy="1286" r="9" fill="#f5f5f4" stroke="#e7e5e4" stroke-width="0.5"/>
+  <text x="44" y="1290" font-size="9" font-weight="500" fill="#44403c" text-anchor="middle">3</text>
+  <text x="60" y="1284" font-size="10" font-weight="500" fill="#44403c">WLAN</text>
+  <rect x="60" y="1290" width="256" height="40" rx="8" fill="#f0fdf4" stroke="#bbf7d0" stroke-width="0.5"/>
+  <text x="76" y="1308" font-size="9" font-weight="500" fill="#166534">📶 MagentaWLAN-5U6J</text>
+  <text x="76" y="1322" font-size="9" fill="#166534" font-family="ui-monospace, monospace">3416 0785 4189 7753 8958</text>
+
+  <!-- KONTAKT -->
+  <rect x="20" y="1340" width="320" height="14" fill="#f5f5f4"/>
+  <text x="32" y="1351" font-size="9" font-weight="500" fill="#a8a29e" letter-spacing="0.06em">KONTAKT</text>
+  <rect x="20" y="1354" width="320" height="184" fill="#ffffff" stroke="#e7e5e4" stroke-width="0.5"/>
+  <rect x="32" y="1366" width="296" height="26" rx="5" fill="#fafaf9" stroke="#e7e5e4" stroke-width="0.5"/>
+  <text x="50" y="1383" font-size="11">💬</text><text x="68" y="1383" font-size="9" fill="#44403c">WhatsApp</text>
+  <rect x="32" y="1398" width="296" height="26" rx="5" fill="#fafaf9" stroke="#e7e5e4" stroke-width="0.5"/>
+  <text x="50" y="1415" font-size="11">📞</text><text x="68" y="1415" font-size="9" fill="#44403c">Telefon</text>
+  <rect x="32" y="1430" width="296" height="26" rx="5" fill="#fafaf9" stroke="#e7e5e4" stroke-width="0.5"/>
+  <text x="50" y="1447" font-size="11">✉️</text><text x="68" y="1447" font-size="9" fill="#44403c">E-Mail</text>
+  <rect x="32" y="1462" width="142" height="26" rx="5" fill="#fafaf9" stroke="#e7e5e4" stroke-width="0.5"/>
+  <text x="50" y="1479" font-size="11">📸</text><text x="68" y="1479" font-size="9" fill="#44403c">Instagram</text>
+  <rect x="182" y="1462" width="142" height="26" rx="5" fill="#fafaf9" stroke="#e7e5e4" stroke-width="0.5"/>
+  <text x="200" y="1479" font-size="11">🎵</text><text x="218" y="1479" font-size="9" fill="#44403c">TikTok</text>
+  <rect x="32" y="1496" width="296" height="32" rx="5" fill="#f5f5f4"/>
+  <text x="180" y="1510" font-size="8" fill="#78716c" text-anchor="middle">Öffnungszeiten</text>
+  <text x="180" y="1522" font-size="9" font-weight="500" fill="#44403c" text-anchor="middle">Mo–Sa  08:00–20:00  ·  So  09:00–18:00</text>
+
+  <!-- FOOTER FISSO -->
+  <rect x="20" y="1538" width="320" height="4" fill="#1c1917"/>
+  <rect x="20" y="1538" width="320" height="56" fill="#ffffff" stroke="#e7e5e4" stroke-width="0.5"/>
+  <rect x="24" y="1542" width="52" height="14" rx="3" fill="#1c1917"/>
+  <text x="50" y="1552" font-size="8" font-weight="500" fill="#ffffff" text-anchor="middle">FEST ↕</text>
+  <line x1="100" y1="1538" x2="100" y2="1594" stroke="#e7e5e4" stroke-width="0.5"/>
+  <line x1="180" y1="1538" x2="180" y2="1594" stroke="#e7e5e4" stroke-width="0.5"/>
+  <line x1="260" y1="1538" x2="260" y2="1594" stroke="#e7e5e4" stroke-width="0.5"/>
+  <rect x="20" y="1538" width="80" height="56" fill="#fafaf9"/>
+  <text x="60" y="1562" font-size="16" text-anchor="middle">🍽</text>
+  <text x="60" y="1580" font-size="8" font-weight="500" fill="#1c1917" text-anchor="middle">Speisekarte</text>
+  <text x="140" y="1562" font-size="16" text-anchor="middle">🎂</text>
+  <text x="140" y="1580" font-size="8" fill="#a8a29e" text-anchor="middle">Torten</text>
+  <text x="220" y="1562" font-size="16" text-anchor="middle">📍</text>
+  <text x="220" y="1580" font-size="8" fill="#a8a29e" text-anchor="middle">Anfahrt</text>
+  <text x="300" y="1562" font-size="16" text-anchor="middle">📞</text>
+  <text x="300" y="1580" font-size="8" fill="#a8a29e" text-anchor="middle">Kontakt</text>
+  <text x="22" y="1602" font-size="8" fill="#a8a29e">② Schnellnavigation zu allen Bereichen — immer sichtbar</text>
+
+  <!-- LEGENDE -->
+  <rect x="20" y="1616" width="320" height="340" rx="12" fill="#f5f5f4" stroke="#e7e5e4" stroke-width="0.5"/>
+  <text x="32" y="1638" font-size="11" font-weight="500" fill="#44403c">Legende</text>
+  <rect x="32" y="1646" width="52" height="14" rx="3" fill="#1c1917"/>
+  <text x="58" y="1656" font-size="8" font-weight="500" fill="#ffffff" text-anchor="middle">FEST ↕</text>
+  <text x="92" y="1656" font-size="9" fill="#78716c">Festes Element — Seite scrollt darunter</text>
+  <rect x="32" y="1668" width="56" height="18" rx="9" fill="#1c1917"/>
+  <text x="60" y="1681" font-size="8" font-weight="500" fill="#ffffff" text-anchor="middle">🌐 DE ▾</text>
+  <text x="96" y="1677" font-size="9" fill="#78716c">Sprache — primäre Steuerung</text>
+  <text x="96" y="1689" font-size="8" fill="#a8a29e">Dunkle Pill = kritisch für Bedienbarkeit</text>
+  <rect x="32" y="1700" width="56" height="16" rx="4" fill="#ffffff" stroke="#d4d4d4" stroke-width="0.5"/>
+  <text x="60" y="1712" font-size="8" fill="#a8a29e" text-anchor="middle">☀️·🌙·auto</text>
+  <text x="96" y="1708" font-size="9" fill="#78716c">Design — sekundäre Steuerung</text>
+  <text x="96" y="1720" font-size="8" fill="#a8a29e">Heller Rahmen = ästhetische Präferenz</text>
+  <rect x="32" y="1730" width="60" height="20" rx="6" fill="#ffffff" stroke="#d4d4d4" stroke-width="0.5"/>
+  <circle cx="46" cy="1740" r="7" fill="#1c1917"/>
+  <text x="46" y="1744" font-size="7" fill="#ffffff" text-anchor="middle">AD</text>
+  <line x1="57" y1="1732" x2="57" y2="1748" stroke="#e7e5e4" stroke-width="0.5"/>
+  <text x="65" y="1744" font-size="8" fill="#44403c">▾</text>
+  <text x="100" y="1738" font-size="9" fill="#78716c">ComboButton — eingeloggt</text>
+  <text x="100" y="1750" font-size="8" fill="#a8a29e">Avatar: Initialen / Foto / Robohash / DiceBear</text>
+  <rect x="32" y="1762" width="52" height="20" rx="6" fill="#ffffff" stroke="#d4d4d4" stroke-width="0.5"/>
+  <text x="42" y="1775" font-size="9" fill="#44403c">🔑</text>
+  <line x1="54" y1="1764" x2="54" y2="1780" stroke="#e7e5e4" stroke-width="0.5"/>
+  <text x="62" y="1775" font-size="8" fill="#a8a29e">▾</text>
+  <text x="92" y="1770" font-size="9" fill="#78716c">ComboButton — nicht eingeloggt</text>
+  <text x="92" y="1782" font-size="8" fill="#a8a29e">Login / Registrieren im Dropdown</text>
+  <rect x="32" y="1794" width="52" height="20" rx="6" fill="#fafaf9" stroke="#fde047" stroke-width="0.5" stroke-dasharray="3,2"/>
+  <text x="58" y="1807" font-size="11" fill="#d4d4d4" text-anchor="middle">🛒</text>
+  <rect x="38" y="1792" width="14" height="10" rx="3" fill="#fef9c3" stroke="#fde047" stroke-width="0.5"/>
+  <text x="45" y="1800" font-size="7" fill="#854d0e" text-anchor="middle">M2</text>
+  <text x="92" y="1800" font-size="9" fill="#78716c">Warenkorb — M2, nur eingeloggte Nutzer</text>
+  <text x="92" y="1812" font-size="8" fill="#a8a29e">Gestrichelt = per Feature-Flag deaktiviert</text>
+  <rect x="32" y="1826" width="60" height="12" rx="3" fill="#ffffff" stroke="#d4d4d4" stroke-width="0.5" stroke-dasharray="3,2"/>
+  <text x="62" y="1835" font-size="7" fill="#a8a29e" text-anchor="middle">Bestellen [M2]</text>
+  <text x="100" y="1835" font-size="9" fill="#78716c">Bestellbutton — deaktiviert M1</text>
+  <rect x="32" y="1848" width="36" height="14" rx="4" fill="#fef9c3" stroke="#fde047" stroke-width="0.5"/>
+  <text x="50" y="1858" font-size="8" fill="#854d0e" text-anchor="middle">M2</text>
+  <text x="76" y="1858" font-size="9" fill="#78716c">Milestone 2 — E-Commerce</text>
+  <rect x="32" y="1870" width="36" height="14" rx="4" fill="#fef9c3" stroke="#fde047" stroke-width="0.5"/>
+  <text x="50" y="1880" font-size="8" fill="#854d0e" text-anchor="middle">M3</text>
+  <text x="76" y="1880" font-size="9" fill="#78716c">Milestone 3 — KI-Tortengenerator</text>
+  <line x1="32" y1="1894" x2="328" y2="1894" stroke="#e7e5e4" stroke-width="0.5"/>
+  <text x="32" y="1910" font-size="9" fill="#a8a29e">Stack: Next.js 14 · Fastify · PostgreSQL · Prisma · next-intl</text>
+  <text x="32" y="1924" font-size="9" fill="#a8a29e">Auth: NextAuth.js · Avatar: DiceBear + Robohash</text>
+  <text x="32" y="1938" font-size="9" fill="#a8a29e">Hosting: Railway · Domain: hayat-baeckerei.de</text>
+  <text x="32" y="1952" font-size="9" fill="#a8a29e">M1: 15. Juli 2026  ·  M2: Herbst 2026  ·  M3: TBD</text>
+  <line x1="32" y1="1964" x2="328" y2="1964" stroke="#e7e5e4" stroke-width="0.5"/>
+  <text x="32" y="1980" font-size="9" fill="#a8a29e">Hayat Bäckerei · Wireframe v3.0 · 19.05.2026</text>
+  <text x="32" y="1994" font-size="9" fill="#a8a29e">Product Owner: Gabriela Belmani · Tech Lead: Alessandro De Prato</text>
+
+</svg>
