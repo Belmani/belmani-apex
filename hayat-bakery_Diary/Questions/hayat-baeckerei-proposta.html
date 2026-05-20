@@ -1,489 +1,709 @@
 <!DOCTYPE html>
 <html lang="it">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Hayat-Bäckerei — Proposta Web Project</title>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
-  <style>
-    * { box-sizing: border-box; margin: 0; padding: 0; }
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="author" content="Gabriela Da Saude Belmani Tumfart" />
+    <meta
+      name="description"
+      content="Proposta di sviluppo web per Hayat-Bäckerei. Piano in tre fasi: sito mobile-first multilingua, e-commerce con pagamenti online e form torte personalizzate con AI rendering."
+    />
+    <meta name="robots" content="noindex, nofollow" />
+    <meta name="robots" content="noindex, nofollow" />
+    <meta name="theme-color" content="#0d1b2e" />
+    <meta name="created" content="2026-05-20" />
+    <meta name="language" content="it" />
 
-    body {
-      background: #dde3ec;
-      display: flex;
-      justify-content: center;
-      padding: 3rem 1rem;
-      min-height: 100vh;
-    }
+    <title>Hayat-Bäckerei — Proposta Web Project</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600&family=DM+Sans:wght@300;400;500&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css"
+    />
+    <style>
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
 
-    .page {
-      width: 794px;
-      min-height: 1123px;
-      background: #ffffff;
-      padding: 64px 72px;
-      font-family: 'DM Sans', sans-serif;
-      color: #0d1b2e;
-    }
+      body {
+        background: #dde3ec;
+        display: flex;
+        justify-content: center;
+        padding: 3rem 1rem;
+        min-height: 100vh;
+      }
 
-    /* HEADER */
-    .top-bar {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-start;
-      margin-bottom: 52px;
-      padding-bottom: 28px;
-      border-bottom: 2px solid #0d1b2e;
-    }
-    .logo-area h1 {
-      font-family: 'Playfair Display', serif;
-      font-size: 28px;
-      font-weight: 600;
-      letter-spacing: -0.5px;
-      color: #0d1b2e;
-    }
-    .logo-area p {
-      font-size: 11px;
-      color: #8a9ab0;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      margin-top: 4px;
-    }
-    .doc-meta { text-align: right; }
-    .doc-meta .doc-label { font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: #8a9ab0; }
-    .doc-meta .doc-date { font-size: 13px; font-weight: 500; color: #0d1b2e; margin-top: 2px; }
-    .save-indicator {
-      font-size: 11px;
-      color: #b0bcc8;
-      text-align: right;
-      margin-top: 6px;
-      transition: color 0.3s;
-    }
-    .save-indicator.saved { color: #1a7a3c; }
+      .page {
+        width: 794px;
+        min-height: 1123px;
+        background: #ffffff;
+        padding: 64px 72px;
+        font-family: "DM Sans", sans-serif;
+        color: #0d1b2e;
+      }
 
-    /* INTRO */
-    .intro { margin-bottom: 44px; }
-    .intro .eyebrow {
-      font-size: 10px;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: #c8960a;
-      font-weight: 500;
-      margin-bottom: 10px;
-    }
-    .intro h2 {
-      font-family: 'Playfair Display', serif;
-      font-size: 36px;
-      font-weight: 500;
-      line-height: 1.2;
-      color: #0d1b2e;
-      margin-bottom: 16px;
-    }
-    .intro p { font-size: 14px; color: #4a5a6e; line-height: 1.7; max-width: 560px; }
+      /* HEADER */
+      .top-bar {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        margin-bottom: 52px;
+        padding-bottom: 28px;
+        border-bottom: 2px solid #0d1b2e;
+      }
+      .logo-area h1 {
+        font-family: "Playfair Display", serif;
+        font-size: 28px;
+        font-weight: 600;
+        letter-spacing: -0.5px;
+        color: #0d1b2e;
+      }
+      .logo-area p {
+        font-size: 11px;
+        color: #8a9ab0;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        margin-top: 4px;
+      }
+      .logo-area .po-name {
+        font-size: 13px;
+        font-weight: 500;
+        color: #0d1b2e;
+        margin-top: 10px;
+      }
+      .logo-area .po-date {
+        font-size: 11px;
+        color: #8a9ab0;
+        margin-top: 3px;
+      }
+      .doc-meta {
+        text-align: right;
+      }
+      .doc-meta .doc-label {
+        font-size: 10px;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: #8a9ab0;
+      }
+      .doc-meta .doc-date {
+        font-size: 13px;
+        font-weight: 500;
+        color: #0d1b2e;
+        margin-top: 2px;
+      }
+      .save-indicator {
+        font-size: 11px;
+        color: #b0bcc8;
+        text-align: right;
+        margin-top: 6px;
+        transition: color 0.3s;
+      }
+      .save-indicator.saved {
+        color: #1a7a3c;
+      }
 
-    /* PHASE */
-    .phase-section { margin-bottom: 36px; }
-    .phase-header { display: flex; align-items: center; gap: 14px; margin-bottom: 18px; }
-    .phase-tag {
-      font-size: 10px;
-      font-weight: 500;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      padding: 4px 12px;
-      border-radius: 20px;
-      white-space: nowrap;
-    }
-    .phase-tag.p1 { background: #0d1b2e; color: #f0c832; border: 1px solid #0d1b2e; }
-    .phase-tag.p2 { background: #fdf3d0; color: #8a6400; border: 1px solid #f0c832; }
-    .phase-tag.p3 { background: #e8f0f8; color: #0d1b2e; border: 1px solid #b0c4d8; }
-    .phase-tag.ask { background: #fff8e0; color: #8a6400; border: 1px solid #f0c832; }
-    .phase-title { font-family: 'Playfair Display', serif; font-size: 15px; font-weight: 500; color: #0d1b2e; }
-    .phase-line { flex: 1; height: 1px; background: #d8e2ec; }
+      /* INTRO */
+      .intro {
+        margin-bottom: 44px;
+      }
+      .intro .eyebrow {
+        font-size: 10px;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        color: #c8960a;
+        font-weight: 500;
+        margin-bottom: 10px;
+      }
+      .intro h2 {
+        font-family: "Playfair Display", serif;
+        font-size: 36px;
+        font-weight: 500;
+        line-height: 1.2;
+        color: #0d1b2e;
+        margin-bottom: 16px;
+      }
+      .intro p {
+        font-size: 14px;
+        color: #4a5a6e;
+        line-height: 1.7;
+        max-width: 560px;
+      }
 
-    /* REQ CARDS */
-    .req-list { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
-    .req-item {
-      display: flex;
-      align-items: flex-start;
-      gap: 12px;
-      padding: 14px 16px;
-      border: 1px solid #d8e2ec;
-      border-radius: 8px;
-      background: #f5f8fc;
-    }
-    .req-icon-wrap {
-      width: 32px;
-      height: 32px;
-      border-radius: 6px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-shrink: 0;
-      font-size: 16px;
-    }
-    .icon-blue  { background: #0d1b2e; color: #f0c832; }
-    .icon-amber { background: #fdf3d0; color: #8a6400; }
-    .icon-light { background: #e8f0f8; color: #1a3a5c; }
-    .req-name { font-size: 13px; font-weight: 500; color: #0d1b2e; line-height: 1.3; }
-    .req-sub { font-size: 11px; color: #7a8a9a; margin-top: 3px; line-height: 1.5; }
+      /* PHASE */
+      .phase-section {
+        margin-bottom: 36px;
+      }
+      .phase-header {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        margin-bottom: 18px;
+      }
+      .phase-tag {
+        font-size: 10px;
+        font-weight: 500;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        padding: 4px 12px;
+        border-radius: 20px;
+        white-space: nowrap;
+      }
+      .phase-tag.p1 {
+        background: #0d1b2e;
+        color: #f0c832;
+        border: 1px solid #0d1b2e;
+      }
+      .phase-tag.p2 {
+        background: #fdf3d0;
+        color: #8a6400;
+        border: 1px solid #f0c832;
+      }
+      .phase-tag.p3 {
+        background: #e8f0f8;
+        color: #0d1b2e;
+        border: 1px solid #b0c4d8;
+      }
+      .phase-tag.ask {
+        background: #fff8e0;
+        color: #8a6400;
+        border: 1px solid #f0c832;
+      }
+      .phase-title {
+        font-family: "Playfair Display", serif;
+        font-size: 15px;
+        font-weight: 500;
+        color: #0d1b2e;
+      }
+      .phase-line {
+        flex: 1;
+        height: 1px;
+        background: #d8e2ec;
+      }
 
-    /* APPUNTI FASE 1 */
-    .notes-block {
-      margin-top: 20px;
-      background: #f5f8fc;
-      border: 1.5px solid #0d1b2e;
-      border-radius: 10px;
-      padding: 20px 22px;
-    }
-    .notes-block .notes-label {
-      font-size: 10px;
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
-      color: #0d1b2e;
-      margin-bottom: 8px;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      font-weight: 500;
-    }
-    .notes-block textarea {
-      width: 100%;
-      background: #ffffff;
-      border: 1px solid #b0c4d8;
-      border-radius: 6px;
-      color: #0d1b2e;
-      font-family: 'DM Sans', sans-serif;
-      font-size: 13px;
-      line-height: 1.7;
-      padding: 12px 14px;
-      resize: vertical;
-      min-height: 120px;
-      outline: none;
-      transition: border-color 0.2s;
-    }
-    .notes-block textarea:focus { border-color: #0d1b2e; }
-    .notes-block textarea::placeholder { color: #b0c4d8; }
+      /* REQ CARDS */
+      .req-list {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+      }
+      .req-item {
+        display: flex;
+        align-items: flex-start;
+        gap: 12px;
+        padding: 14px 16px;
+        border: 1px solid #d8e2ec;
+        border-radius: 8px;
+        background: #f5f8fc;
+      }
+      .req-icon-wrap {
+        width: 32px;
+        height: 32px;
+        border-radius: 6px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+        font-size: 16px;
+      }
+      .icon-blue {
+        background: #0d1b2e;
+        color: #f0c832;
+      }
+      .icon-amber {
+        background: #fdf3d0;
+        color: #8a6400;
+      }
+      .icon-light {
+        background: #e8f0f8;
+        color: #1a3a5c;
+      }
+      .req-name {
+        font-size: 13px;
+        font-weight: 500;
+        color: #0d1b2e;
+        line-height: 1.3;
+      }
+      .req-sub {
+        font-size: 11px;
+        color: #7a8a9a;
+        margin-top: 3px;
+        line-height: 1.5;
+      }
 
-    .section-divider { border: none; border-top: 1px solid #d8e2ec; margin: 40px 0; }
+      /* APPUNTI FASE 1 */
+      .notes-block {
+        margin-top: 20px;
+        background: #f5f8fc;
+        border: 1.5px solid #0d1b2e;
+        border-radius: 10px;
+        padding: 20px 22px;
+      }
+      .notes-block .notes-label {
+        font-size: 10px;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+        color: #0d1b2e;
+        margin-bottom: 8px;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        font-weight: 500;
+      }
+      .notes-block textarea {
+        width: 100%;
+        background: #ffffff;
+        border: 1px solid #b0c4d8;
+        border-radius: 6px;
+        color: #0d1b2e;
+        font-family: "DM Sans", sans-serif;
+        font-size: 13px;
+        line-height: 1.7;
+        padding: 12px 14px;
+        resize: vertical;
+        min-height: 120px;
+        outline: none;
+        transition: border-color 0.2s;
+      }
+      .notes-block textarea:focus {
+        border-color: #0d1b2e;
+      }
+      .notes-block textarea::placeholder {
+        color: #b0c4d8;
+      }
 
-    /* DOMANDE */
-    .q-list { display: flex; flex-direction: column; gap: 14px; }
-    .q-item {
-      display: flex;
-      gap: 16px;
-      padding: 16px 18px;
-      border: 1px solid #e8f0f8;
-      border-radius: 8px;
-      background: #f9fbfd;
-    }
-    .q-item.urgent {
-      border: 1.5px solid #f0c832;
-      background: #fffdf0;
-    }
-    .q-num {
-      font-family: 'Playfair Display', serif;
-      font-size: 22px;
-      font-weight: 400;
-      color: #d8e2ec;
-      line-height: 1;
-      flex-shrink: 0;
-      width: 24px;
-    }
-    .q-body { flex: 1; }
-    .q-title { font-size: 13px; font-weight: 500; color: #0d1b2e; margin-bottom: 4px; }
-    .q-text { font-size: 12px; color: #5a6a7a; line-height: 1.6; }
-    .q-note {
-      display: inline-block;
-      margin-top: 6px;
-      font-size: 11px;
-      color: #7a5a00;
-      background: #fdf3d0;
-      border: 1px solid #f0c832;
-      padding: 2px 8px;
-      border-radius: 4px;
-    }
-    .q-answer-label {
-      font-size: 10px;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: #8a9ab0;
-      margin-top: 12px;
-      margin-bottom: 4px;
-    }
-    .q-answer {
-      width: 100%;
-      background: #ffffff;
-      border: 1px solid #d8e2ec;
-      border-radius: 6px;
-      color: #0d1b2e;
-      font-family: 'DM Sans', sans-serif;
-      font-size: 12px;
-      line-height: 1.6;
-      padding: 10px 12px;
-      resize: vertical;
-      min-height: 56px;
-      outline: none;
-      transition: border-color 0.2s;
-    }
-    .q-answer:focus { border-color: #0d1b2e; }
-    .q-answer::placeholder { color: #c8d4de; }
+      .section-divider {
+        border: none;
+        border-top: 1px solid #d8e2ec;
+        margin: 40px 0;
+      }
 
-    /* FOOTER */
-    .footer {
-      margin-top: 48px;
-      padding-top: 20px;
-      border-top: 2px solid #0d1b2e;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-    .footer-note { font-size: 11px; color: #8a9ab0; }
-    .footer-brand {
-      font-family: 'Playfair Display', serif;
-      font-size: 13px;
-      color: #c8960a;
-    }
-  </style>
-</head>
-<body>
-  <div class="page">
+      /* DOMANDE */
+      .q-list {
+        display: flex;
+        flex-direction: column;
+        gap: 14px;
+      }
+      .q-item {
+        display: flex;
+        gap: 16px;
+        padding: 16px 18px;
+        border: 1px solid #e8f0f8;
+        border-radius: 8px;
+        background: #f9fbfd;
+      }
+      .q-item.urgent {
+        border: 1.5px solid #f0c832;
+        background: #fffdf0;
+      }
+      .q-num {
+        font-family: "Playfair Display", serif;
+        font-size: 22px;
+        font-weight: 400;
+        color: #d8e2ec;
+        line-height: 1;
+        flex-shrink: 0;
+        width: 24px;
+      }
+      .q-body {
+        flex: 1;
+      }
+      .q-title {
+        font-size: 13px;
+        font-weight: 500;
+        color: #0d1b2e;
+        margin-bottom: 4px;
+      }
+      .q-text {
+        font-size: 12px;
+        color: #5a6a7a;
+        line-height: 1.6;
+      }
+      .q-note {
+        display: inline-block;
+        margin-top: 6px;
+        font-size: 11px;
+        color: #7a5a00;
+        background: #fdf3d0;
+        border: 1px solid #f0c832;
+        padding: 2px 8px;
+        border-radius: 4px;
+      }
+      .q-answer-label {
+        font-size: 10px;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: #8a9ab0;
+        margin-top: 12px;
+        margin-bottom: 4px;
+      }
+      .q-answer {
+        width: 100%;
+        background: #ffffff;
+        border: 1px solid #d8e2ec;
+        border-radius: 6px;
+        color: #0d1b2e;
+        font-family: "DM Sans", sans-serif;
+        font-size: 12px;
+        line-height: 1.6;
+        padding: 10px 12px;
+        resize: vertical;
+        min-height: 56px;
+        outline: none;
+        transition: border-color 0.2s;
+      }
+      .q-answer:focus {
+        border-color: #0d1b2e;
+      }
+      .q-answer::placeholder {
+        color: #c8d4de;
+      }
 
-    <div class="top-bar">
-      <div class="logo-area">
-        <h1>Hayat-Bäckerei</h1>
-        <p>Proposta iniziale &mdash; Web Project</p>
+      /* FOOTER */
+      .footer {
+        margin-top: 48px;
+        padding-top: 20px;
+        border-top: 2px solid #0d1b2e;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      .footer-note {
+        font-size: 11px;
+        color: #8a9ab0;
+      }
+      .footer-brand {
+        font-family: "Playfair Display", serif;
+        font-size: 13px;
+        color: #c8960a;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="page">
+      <div class="top-bar">
+        <div class="logo-area">
+          <h1>Hayat-Bäckerei</h1>
+          <p>Proposta iniziale &mdash; Web Project</p>
+          <div class="po-name">
+            Product Owner: Gabriela Da Saude Belmani Tumfart
+          </div>
+          <div class="po-date">Data: 20/05/2026</div>
+        </div>
+        <div class="doc-meta">
+          <div class="doc-label">Data documento</div>
+          <div class="doc-date">Maggio 2026</div>
+          <div class="save-indicator" id="save-indicator">bozza locale</div>
+        </div>
       </div>
-      <div class="doc-meta">
-        <div class="doc-label">Data documento</div>
-        <div class="doc-date">Maggio 2026</div>
-        <div class="save-indicator" id="save-indicator">bozza locale</div>
+
+      <div class="intro">
+        <div class="eyebrow">Prima riunione con il cliente</div>
+        <h2>Cosa costruiremo<br />insieme</h2>
+        <p>
+          Questa proposta descrive il piano di sviluppo per il nuovo sito web di
+          Hayat-Bäckerei, organizzato in tre fasi progressive. Prima di
+          iniziare, abbiamo alcune domande fondamentali per capire le tue
+          esigenze e lavorare nella direzione giusta.
+        </p>
+      </div>
+
+      <!-- FASE 1 -->
+      <div class="phase-section">
+        <div class="phase-header">
+          <span class="phase-tag p1">Fase 1</span>
+          <span class="phase-title">Base del sito</span>
+          <div class="phase-line"></div>
+        </div>
+        <div class="req-list">
+          <div class="req-item">
+            <div class="req-icon-wrap icon-blue">
+              <i class="ti ti-user-circle"></i>
+            </div>
+            <div>
+              <div class="req-name">Identità turca del brand</div>
+              <div class="req-sub">
+                Posizionamento come panetteria turca autentica
+              </div>
+            </div>
+          </div>
+          <div class="req-item">
+            <div class="req-icon-wrap icon-blue">
+              <i class="ti ti-device-mobile"></i>
+            </div>
+            <div>
+              <div class="req-name">Mobile-first, one-page scrolling</div>
+              <div class="req-sub">
+                Layout ottimizzato per smartphone, scorrimento fluido
+              </div>
+            </div>
+          </div>
+          <div class="req-item">
+            <div class="req-icon-wrap icon-blue">
+              <i class="ti ti-layout-bottombar"></i>
+            </div>
+            <div>
+              <div class="req-name">Bottom navigation</div>
+              <div class="req-sub">
+                Navigazione inferiore, nessun menu hamburger
+              </div>
+            </div>
+          </div>
+          <div class="req-item">
+            <div class="req-icon-wrap icon-blue">
+              <i class="ti ti-wifi"></i>
+            </div>
+            <div>
+              <div class="req-name">Password Wi-Fi inline</div>
+              <div class="req-sub">Visibile direttamente nella pagina</div>
+            </div>
+          </div>
+          <div class="req-item">
+            <div class="req-icon-wrap icon-blue">
+              <i class="ti ti-language"></i>
+            </div>
+            <div>
+              <div class="req-name">Supporto multilingua</div>
+              <div class="req-sub">Tedesco, turco e inglese (DE / TR / EN)</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="notes-block">
+          <div class="notes-label">
+            <i class="ti ti-pencil" style="font-size: 14px"></i>
+            Appunti di sviluppo — Fase 1
+          </div>
+          <textarea
+            id="notes-fase1"
+            placeholder="Scrivi qui cosa farai concretamente: struttura delle pagine, componenti, routing, API, stack tecnico, decisioni di design..."
+          ></textarea>
+        </div>
+      </div>
+
+      <!-- FASE 2 -->
+      <div class="phase-section">
+        <div class="phase-header">
+          <span class="phase-tag p2">Fase 2</span>
+          <span class="phase-title">E-commerce</span>
+          <div class="phase-line"></div>
+        </div>
+        <div class="req-list">
+          <div class="req-item">
+            <div class="req-icon-wrap icon-amber">
+              <i class="ti ti-shopping-cart"></i>
+            </div>
+            <div>
+              <div class="req-name">Ordini online e carrello</div>
+              <div class="req-sub">
+                Integrazione pagamenti via Stripe o PayPal
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- FASE 3 -->
+      <div class="phase-section">
+        <div class="phase-header">
+          <span class="phase-tag p3">Fase 3</span>
+          <span class="phase-title">Funzionalità avanzate</span>
+          <div class="phase-line"></div>
+        </div>
+        <div class="req-list">
+          <div class="req-item">
+            <div class="req-icon-wrap icon-light">
+              <i class="ti ti-sparkles"></i>
+            </div>
+            <div>
+              <div class="req-name">
+                Form torta personalizzata con AI rendering
+              </div>
+              <div class="req-sub">
+                Il cliente configura la torta e riceve un'anteprima generata
+                dall'intelligenza artificiale
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <hr class="section-divider" />
+
+      <!-- DOMANDE -->
+      <div class="phase-section">
+        <div class="phase-header">
+          <span class="phase-tag ask">Da chiarire</span>
+          <span class="phase-title">Domande per il cliente</span>
+          <div class="phase-line"></div>
+        </div>
+        <div class="q-list">
+          <div class="q-item urgent">
+            <div class="q-num">1</div>
+            <div class="q-body">
+              <div class="q-title">Accesso al dominio hayat-baeckerei.de</div>
+              <div class="q-text">
+                Hai le credenziali di accesso al registrar, o sono ancora in
+                mano all'agenzia VoiceHub? Per modificare i DNS e avviare la
+                migrazione è necessario recuperare l'accesso prima di iniziare
+                qualsiasi altra operazione.
+              </div>
+              <span class="q-note">⚠ priorità urgente</span>
+              <div class="q-answer-label">Risposta / appunti</div>
+              <textarea
+                class="q-answer"
+                id="q1"
+                placeholder="Scrivi qui la risposta del cliente..."
+              ></textarea>
+            </div>
+          </div>
+
+          <div class="q-item">
+            <div class="q-num">2</div>
+            <div class="q-body">
+              <div class="q-title">Identità del brand</div>
+              <div class="q-text">
+                Come vuoi posizionarti esattamente? "Türkische Bäckerei" è il
+                posizionamento corretto, o preferisci qualcosa di diverso?
+              </div>
+              <div class="q-answer-label">Risposta / appunti</div>
+              <textarea
+                class="q-answer"
+                id="q2"
+                placeholder="Scrivi qui la risposta del cliente..."
+              ></textarea>
+            </div>
+          </div>
+
+          <div class="q-item">
+            <div class="q-num">3</div>
+            <div class="q-body">
+              <div class="q-title">Catalogo prodotti</div>
+              <div class="q-text">
+                Nel menu attuale ci sono circa 6 prodotti senza prezzo e Şirin
+                Baklava appare duplicato. Dobbiamo validare l'intero catalogo
+                prima di procedere.
+              </div>
+              <div class="q-answer-label">Risposta / appunti</div>
+              <textarea
+                class="q-answer"
+                id="q3"
+                placeholder="Scrivi qui la risposta del cliente..."
+              ></textarea>
+            </div>
+          </div>
+
+          <div class="q-item">
+            <div class="q-num">4</div>
+            <div class="q-body">
+              <div class="q-title">Richieste torte personalizzate</div>
+              <div class="q-text">
+                Al momento le richieste arrivano solo via WhatsApp e telefono.
+                Cosa ti serve sapere dal cliente quando ordina? (misura, gusto,
+                data, testo decorativo?) Questo definisce i campi del form
+                futuro.
+              </div>
+              <div class="q-answer-label">Risposta / appunti</div>
+              <textarea
+                class="q-answer"
+                id="q4"
+                placeholder="Scrivi qui la risposta del cliente..."
+              ></textarea>
+            </div>
+          </div>
+
+          <div class="q-item">
+            <div class="q-num">5</div>
+            <div class="q-body">
+              <div class="q-title">Foto dei prodotti</div>
+              <div class="q-text">
+                Alcune immagini attuali sono stock da Pexels e Pixabay (donut,
+                croissant, muffin). Hai foto reali di quei prodotti, o
+                preferisci organizzare una sessione fotografica? Le foto stock
+                danno un'impressione generica e non rendono giustizia al tuo
+                lavoro.
+              </div>
+              <div class="q-answer-label">Risposta / appunti</div>
+              <textarea
+                class="q-answer"
+                id="q5"
+                placeholder="Scrivi qui la risposta del cliente..."
+              ></textarea>
+            </div>
+          </div>
+
+          <div class="q-item">
+            <div class="q-num">6</div>
+            <div class="q-body">
+              <div class="q-title">Priorità linguistica</div>
+              <div class="q-text">
+                Il turco è la seconda lingua più importante per i tuoi clienti,
+                o ci sono altre priorità da considerare?
+              </div>
+              <div class="q-answer-label">Risposta / appunti</div>
+              <textarea
+                class="q-answer"
+                id="q6"
+                placeholder="Scrivi qui la risposta del cliente..."
+              ></textarea>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer">
+        <div class="footer-note">Documento riservato &mdash; uso interno</div>
+        <div class="footer-brand">Hayat-Bäckerei 2026</div>
       </div>
     </div>
 
-    <div class="intro">
-      <div class="eyebrow">Prima riunione con il cliente</div>
-      <h2>Cosa costruiremo<br>insieme</h2>
-      <p>Questa proposta descrive il piano di sviluppo per il nuovo sito web di Hayat-Bäckerei, organizzato in tre fasi progressive. Prima di iniziare, abbiamo alcune domande fondamentali per capire le tue esigenze e lavorare nella direzione giusta.</p>
-    </div>
+    <script>
+      const STORAGE_KEY = "hayat-proposta-light-v1";
+      const fields = ["notes-fase1", "q1", "q2", "q3", "q4", "q5", "q6"];
+      const indicator = document.getElementById("save-indicator");
+      let saveTimeout;
 
-    <!-- FASE 1 -->
-    <div class="phase-section">
-      <div class="phase-header">
-        <span class="phase-tag p1">Fase 1</span>
-        <span class="phase-title">Base del sito</span>
-        <div class="phase-line"></div>
-      </div>
-      <div class="req-list">
-        <div class="req-item">
-          <div class="req-icon-wrap icon-blue"><i class="ti ti-user-circle"></i></div>
-          <div>
-            <div class="req-name">Identità turca del brand</div>
-            <div class="req-sub">Posizionamento come panetteria turca autentica</div>
-          </div>
-        </div>
-        <div class="req-item">
-          <div class="req-icon-wrap icon-blue"><i class="ti ti-device-mobile"></i></div>
-          <div>
-            <div class="req-name">Mobile-first, one-page scrolling</div>
-            <div class="req-sub">Layout ottimizzato per smartphone, scorrimento fluido</div>
-          </div>
-        </div>
-        <div class="req-item">
-          <div class="req-icon-wrap icon-blue"><i class="ti ti-layout-bottombar"></i></div>
-          <div>
-            <div class="req-name">Bottom navigation</div>
-            <div class="req-sub">Navigazione inferiore, nessun menu hamburger</div>
-          </div>
-        </div>
-        <div class="req-item">
-          <div class="req-icon-wrap icon-blue"><i class="ti ti-wifi"></i></div>
-          <div>
-            <div class="req-name">Password Wi-Fi inline</div>
-            <div class="req-sub">Visibile direttamente nella pagina</div>
-          </div>
-        </div>
-        <div class="req-item">
-          <div class="req-icon-wrap icon-blue"><i class="ti ti-language"></i></div>
-          <div>
-            <div class="req-name">Supporto multilingua</div>
-            <div class="req-sub">Tedesco, turco e inglese (DE / TR / EN)</div>
-          </div>
-        </div>
-      </div>
+      function load() {
+        try {
+          const saved = JSON.parse(localStorage.getItem(STORAGE_KEY)) || {};
+          fields.forEach(function (id) {
+            const el = document.getElementById(id);
+            if (el && saved[id]) el.value = saved[id];
+          });
+          if (Object.keys(saved).length > 0) {
+            indicator.textContent = "bozza salvata";
+            indicator.classList.add("saved");
+          }
+        } catch (e) {}
+      }
 
-      <div class="notes-block">
-        <div class="notes-label">
-          <i class="ti ti-pencil" style="font-size:14px"></i>
-          Appunti di sviluppo — Fase 1
-        </div>
-        <textarea
-          id="notes-fase1"
-          placeholder="Scrivi qui cosa farai concretamente: struttura delle pagine, componenti, routing, API, stack tecnico, decisioni di design..."
-        ></textarea>
-      </div>
-    </div>
+      function save() {
+        try {
+          const data = {};
+          fields.forEach(function (id) {
+            const el = document.getElementById(id);
+            if (el) data[id] = el.value;
+          });
+          localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+          indicator.textContent = "salvato automaticamente";
+          indicator.classList.add("saved");
+          clearTimeout(saveTimeout);
+          saveTimeout = setTimeout(function () {
+            indicator.textContent = "bozza salvata";
+          }, 2000);
+        } catch (e) {}
+      }
 
-    <!-- FASE 2 -->
-    <div class="phase-section">
-      <div class="phase-header">
-        <span class="phase-tag p2">Fase 2</span>
-        <span class="phase-title">E-commerce</span>
-        <div class="phase-line"></div>
-      </div>
-      <div class="req-list">
-        <div class="req-item">
-          <div class="req-icon-wrap icon-amber"><i class="ti ti-shopping-cart"></i></div>
-          <div>
-            <div class="req-name">Ordini online e carrello</div>
-            <div class="req-sub">Integrazione pagamenti via Stripe o PayPal</div>
-          </div>
-        </div>
-      </div>
-    </div>
+      fields.forEach(function (id) {
+        const el = document.getElementById(id);
+        if (el) el.addEventListener("input", save);
+      });
 
-    <!-- FASE 3 -->
-    <div class="phase-section">
-      <div class="phase-header">
-        <span class="phase-tag p3">Fase 3</span>
-        <span class="phase-title">Funzionalità avanzate</span>
-        <div class="phase-line"></div>
-      </div>
-      <div class="req-list">
-        <div class="req-item">
-          <div class="req-icon-wrap icon-light"><i class="ti ti-sparkles"></i></div>
-          <div>
-            <div class="req-name">Form torta personalizzata con AI rendering</div>
-            <div class="req-sub">Il cliente configura la torta e riceve un'anteprima generata dall'intelligenza artificiale</div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <hr class="section-divider">
-
-    <!-- DOMANDE -->
-    <div class="phase-section">
-      <div class="phase-header">
-        <span class="phase-tag ask">Da chiarire</span>
-        <span class="phase-title">Domande per il cliente</span>
-        <div class="phase-line"></div>
-      </div>
-      <div class="q-list">
-
-        <div class="q-item urgent">
-          <div class="q-num">1</div>
-          <div class="q-body">
-            <div class="q-title">Accesso al dominio hayat-baeckerei.de</div>
-            <div class="q-text">Hai le credenziali di accesso al registrar, o sono ancora in mano all'agenzia VoiceHub? Per modificare i DNS e avviare la migrazione è necessario recuperare l'accesso prima di iniziare qualsiasi altra operazione.</div>
-            <span class="q-note">⚠ priorità urgente</span>
-            <div class="q-answer-label">Risposta / appunti</div>
-            <textarea class="q-answer" id="q1" placeholder="Scrivi qui la risposta del cliente..."></textarea>
-          </div>
-        </div>
-
-        <div class="q-item">
-          <div class="q-num">2</div>
-          <div class="q-body">
-            <div class="q-title">Identità del brand</div>
-            <div class="q-text">Come vuoi posizionarti esattamente? "Türkische Bäckerei" è il posizionamento corretto, o preferisci qualcosa di diverso?</div>
-            <div class="q-answer-label">Risposta / appunti</div>
-            <textarea class="q-answer" id="q2" placeholder="Scrivi qui la risposta del cliente..."></textarea>
-          </div>
-        </div>
-
-        <div class="q-item">
-          <div class="q-num">3</div>
-          <div class="q-body">
-            <div class="q-title">Catalogo prodotti</div>
-            <div class="q-text">Nel menu attuale ci sono circa 6 prodotti senza prezzo e Şirin Baklava appare duplicato. Dobbiamo validare l'intero catalogo prima di procedere.</div>
-            <div class="q-answer-label">Risposta / appunti</div>
-            <textarea class="q-answer" id="q3" placeholder="Scrivi qui la risposta del cliente..."></textarea>
-          </div>
-        </div>
-
-        <div class="q-item">
-          <div class="q-num">4</div>
-          <div class="q-body">
-            <div class="q-title">Richieste torte personalizzate</div>
-            <div class="q-text">Al momento le richieste arrivano solo via WhatsApp e telefono. Cosa ti serve sapere dal cliente quando ordina? (misura, gusto, data, testo decorativo?) Questo definisce i campi del form futuro.</div>
-            <div class="q-answer-label">Risposta / appunti</div>
-            <textarea class="q-answer" id="q4" placeholder="Scrivi qui la risposta del cliente..."></textarea>
-          </div>
-        </div>
-
-        <div class="q-item">
-          <div class="q-num">5</div>
-          <div class="q-body">
-            <div class="q-title">Foto dei prodotti</div>
-            <div class="q-text">Alcune immagini attuali sono stock da Pexels e Pixabay (donut, croissant, muffin). Hai foto reali di quei prodotti, o preferisci organizzare una sessione fotografica? Le foto stock danno un'impressione generica e non rendono giustizia al tuo lavoro.</div>
-            <div class="q-answer-label">Risposta / appunti</div>
-            <textarea class="q-answer" id="q5" placeholder="Scrivi qui la risposta del cliente..."></textarea>
-          </div>
-        </div>
-
-        <div class="q-item">
-          <div class="q-num">6</div>
-          <div class="q-body">
-            <div class="q-title">Priorità linguistica</div>
-            <div class="q-text">Il turco è la seconda lingua più importante per i tuoi clienti, o ci sono altre priorità da considerare?</div>
-            <div class="q-answer-label">Risposta / appunti</div>
-            <textarea class="q-answer" id="q6" placeholder="Scrivi qui la risposta del cliente..."></textarea>
-          </div>
-        </div>
-
-      </div>
-    </div>
-
-    <div class="footer">
-      <div class="footer-note">Documento riservato &mdash; uso interno</div>
-      <div class="footer-brand">Hayat-Bäckerei 2026</div>
-    </div>
-
-  </div>
-
-  <script>
-    const STORAGE_KEY = 'hayat-proposta-light-v1';
-    const fields = ['notes-fase1', 'q1', 'q2', 'q3', 'q4', 'q5', 'q6'];
-    const indicator = document.getElementById('save-indicator');
-    let saveTimeout;
-
-    function load() {
-      try {
-        const saved = JSON.parse(localStorage.getItem(STORAGE_KEY)) || {};
-        fields.forEach(function(id) {
-          const el = document.getElementById(id);
-          if (el && saved[id]) el.value = saved[id];
-        });
-        if (Object.keys(saved).length > 0) {
-          indicator.textContent = 'bozza salvata';
-          indicator.classList.add('saved');
-        }
-      } catch(e) {}
-    }
-
-    function save() {
-      try {
-        const data = {};
-        fields.forEach(function(id) {
-          const el = document.getElementById(id);
-          if (el) data[id] = el.value;
-        });
-        localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
-        indicator.textContent = 'salvato automaticamente';
-        indicator.classList.add('saved');
-        clearTimeout(saveTimeout);
-        saveTimeout = setTimeout(function() {
-          indicator.textContent = 'bozza salvata';
-        }, 2000);
-      } catch(e) {}
-    }
-
-    fields.forEach(function(id) {
-      const el = document.getElementById(id);
-      if (el) el.addEventListener('input', save);
-    });
-
-    load();
-  </script>
-</body>
+      load();
+    </script>
+  </body>
 </html>
