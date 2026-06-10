@@ -154,6 +154,8 @@ Il wizard grafico scriverà i valori non sensibili in `config.json` e imposterà
 
 **Nota mocking:** i mock di classi instanziate con `new` devono usare `function` e non arrow function — le arrow function non possono essere costruttori in JavaScript. Lezione appresa in M2.
 
+**Nota async nei test:** le callback di `it()` che contengono `await` (es. import dinamici) devono essere dichiarate `async`. Lezione appresa in M3.
+
 **Alternative valutate:**
 - Jest: scartato — architettura CommonJS-first, performance inferiore, configurazione TypeScript più verbosa
 - Bun Test: scartato — ecosistema ancora giovane, prematuro per un progetto distribuito a terzi
@@ -335,7 +337,7 @@ interface EnrichedBusiness extends Business {
 
 ---
 
-## DTR-019 — Statistiche aggregata discovery: rinviata a M11+
+## DTR-019 — Statistiche aggregate discovery: rinviate a M11+
 
 **Data:** 2026-06-08
 **Stato:** Rinviata (M11+)
@@ -387,3 +389,67 @@ interface EnrichedBusiness extends Business {
 - Separazione netta delle responsabilità: deduplica nel file, dati aziendali nel modello, statistiche in M11+
 - Nessuna duplicazione di informazioni già presenti in `Business`
 - File minimo, veloce, senza rischio di inconsistenza
+
+---
+
+## DTR-022 — `last_seen` nel modello Business
+
+**Data:** 2026-06-10
+**Stato:** Accettata — implementata in M3
+
+**Decisione:** Il campo `last_seen` (ISO timestamp) viene aggiunto al modello `Business` come campo opzionale, in parallelo a `first_seen` (DTR-020). Viene aggiornato da `DedupService.markSeen()` ad ogni esecuzione in cui il business è presente nel batch inviato.
+
+**Motivazione:**
+- `first_seen` traccia la prima rilevazione — invariante nel tempo
+- `last_seen` traccia l'ultima rilevazione — aggiornato ad ogni run
+- La distinzione è necessaria per analisi di frequenza e rilevanza dei lead (es. "questo studio dentistico appare ogni settimana")
+- Entrambi i campi saranno colonne native nella tabella SQLite di M11+, senza necessità di migrazione dati
+
+**Comportamento in `markSeen()`:**
+- `first_seen`: scritto una volta, mai sovrascritto — se già presente sull'oggetto, viene preservato
+- `last_seen`: sempre aggiornato al timestamp corrente dell'esecuzione
+
+**Alternativa valutata e scartata:**
+- `last_updated` (aggiornamento dei metadati del business): scartato — non ha ancora un produttore nel sistema. Territory di M10+, aggiunta ora sarebbe architettura speculativa (stesso principio di DTR-002 su `IFetcher`).
+
+---
+
+## DTR-023 — `DedupService`: path iniettabile nel costruttore
+
+**Data:** 2026-06-10
+**Stato:** Accettata — implementata in M3
+
+**Decisione:** `DedupService` accetta un path opzionale nel costruttore per il file `seen_firms.json`. Il default è `path.resolve(process.cwd(), 'seen_firms.json')`.
+
+```typescript
+constructor(filePath = path.resolve(process.cwd(), 'seen_firms.json'))
+```
+
+**Motivazione:**
+- Stesso pattern adottato da `loadConfig(configPath?)` in M1 — coerenza nell'approccio alla testability
+- Permette ai test di usare directory temporanee isolate (`os.tmpdir()`) senza mock del filesystem
+- Mock di `fs` nasconde bug reali di serializzazione JSON — file reali sono più affidabili
+- Zero impatto sull'utilizzo in produzione: il default copre il caso nominale
+
+---
+
+## DTR-024 — `DedupService`: lazy loading e scrittura sincrona
+
+**Data:** 2026-06-10
+**Stato:** Accettata — implementata in M3
+
+**Decisione:** `DedupService` carica `seen_firms.json` in modo lazy (al primo utilizzo, non nel costruttore) e scrive su disco in modo sincrono (`fs.writeFileSync`).
+
+**Motivazione lazy loading:**
+- Il file potrebbe non esistere alla costruzione dell'istanza (prima esecuzione)
+- Il boot del processo non deve fallire per un file mancante
+- La struttura vuota viene creata automaticamente al primo `markSeen()` o `reset()`
+
+**Motivazione scrittura sincrona:**
+- Il file è piccolo (< 1 MB anche dopo anni di utilizzo — solo array di stringhe)
+- La sincronia garantisce che i `place_id` siano su disco anche se il processo viene terminato immediatamente dopo la scrittura
+- La pipeline chiama `markSeen()` come ultima operazione dopo l'invio email — la latenza aggiuntiva è trascurabile
+
+**Recovery da file corrotto:**
+- JSON malformato o struttura non valida (`seen` non è un array) → warning su logger, riparte da struttura vuota
+- I dati successivi vengono scritti correttamente — nessuna perdita di stato futuro
