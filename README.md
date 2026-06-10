@@ -29,12 +29,12 @@ belmani-apex/
 
 ## Convenzioni di naming
 
-| Prefisso | Tipo documento | Esempio |
-|---|---|---|
-| `TTR_` | Tutorial tecnico | `TTR_SpotCast_M2_Vitest.md` |
-| `GRM_` | Grooming milestone | `GRM_SpotCast_M1_M6.md` |
-| `MLS_` | Riepilogo milestone | `MLS_SpotCast_M2.md` |
-| `DTR` | Decisioni tecniche | `DTR.md` |
+| Prefisso | Tipo documento          | Esempio                      |
+| -------- | ----------------------- | ---------------------------- |
+| `TTR_`   | Tutorial tecnico        | `TTR_SpotCast_M2_Vitest.md`  |
+| `GRM_`   | Grooming milestone      | `GRM_SpotCast_M1.md`         |
+| `MLS_`   | Riepilogo milestone     | `MLS_SpotCast_M2.md`         |
+| `DTR`    | Decisioni tecniche      | `DTR.md`                     |
 | `README` | Documentazione generale | `README.md`, `README_DEV.md` |
 
 Il pattern dei file è sempre: `<SIGLA>_<Progetto>_<Milestone>_<Topic>.md`
@@ -43,11 +43,11 @@ Il pattern dei file è sempre: `<SIGLA>_<Progetto>_<Milestone>_<Topic>.md`
 
 ## Progetti attivi
 
-| Progetto | Descrizione | Stato |
-|---|---|---|
-| [SpotCast](./SpotCast/README.md) | Lead generation automatica da Google Maps | 🟢 In sviluppo — v0.1.0 |
-| NomadSync | Sincronizzazione cartelle via GitHub | 🟡 Backend 95% — UI in avvio |
-| ForgeUI | Design system JavaFX per Maven Central | 🟡 M1 in corso |
+| Progetto                         | Descrizione                               | Stato                        |
+| -------------------------------- | ----------------------------------------- | ---------------------------- |
+| [SpotCast](./SpotCast/README.md) | Lead generation automatica da Google Maps | 🟢 In sviluppo — v0.1.0      |
+| NomadSync                        | Sincronizzazione cartelle via GitHub      | 🟡 Backend 95% — UI in avvio |
+| ForgeUI                          | Design system JavaFX per Maven Central    | 🟡 M2 in corso               |
 
 ---
 
