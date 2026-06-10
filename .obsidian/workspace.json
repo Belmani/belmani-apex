@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "README.md",
+                "file": "SpotCast/tutorials/TTR_SpotCast_M1_Tech_stack.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "README"
+              "title": "TTR_SpotCast_M1_Tech_stack"
             }
           }
         ]
@@ -183,10 +183,12 @@
       "bases:Crea nuova Base": false
     }
   },
-  "active": "70bad1849e452ff8",
+  "active": "4939f5b0e2162571",
   "lastOpenFiles": [
-    "SpotCast/grooming/GRM_SpotCast_M2.md",
+    "SpotCast/milestones/MLS_SpotCast_M4.md",
+    "SpotCast/docs/README_USER.md",
     "README.md",
+    "SpotCast/grooming/GRM_SpotCast_M2.md",
     "SpotCast/milestones/MLS_SpotCast_M2.md",
     "SpotCast/milestones/MLS_SpotCast_M1.md",
     "SpotCast/milestones/MLS_SpotCast_M3.md",
@@ -201,16 +203,14 @@
     "SpotCast/tutorials/TTR_SpotCast_M1_GitHub.md",
     "SpotCast/tutorials/TTR_SpotCast_M1_Google_api_key.md",
     "SpotCast/tutorials/TTR_SpotCast_M2_Pnpm.md",
-    "SpotCast/tutorials/TTR_SpotCast_Tech_stack.md",
+    "SpotCast/tutorials/TTR_SpotCast_M1_Tech_stack.md",
     "SpotCast/README.md",
     "SpotCast/tutorials/TTR_SpotCast_M2_Vitest.md",
     "SpotCast/milestones/MILESTONE_M2.md",
     "SpotCast/milestones/MILESTONE_M1.md",
-    "SpotCast/docs/README_USER.md",
     "SpotCast/docs/README_DEV.md",
     "SpotCast/docs/DTR.md",
     "SpotCast/docs/DTR (1).md",
-    "SpotCast/grooming/GROOMING_M1_M6.md",
     "SpotCast/tutorials",
     "SpotCast/milestones",
     "SpotCast/docs",

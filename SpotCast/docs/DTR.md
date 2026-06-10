@@ -219,11 +219,11 @@ interface EnrichedBusiness extends Business {
 
 **Decisione:** SpotCast è distribuito con 10 lingue al lancio, selezionate per massimizzare la copertura del bacino di utenza mondiale.
 
-**Lingue di lancio:** Italiano, Inglese, Tedesco, Francese, Spagnolo, Portoghese, Cinese semplificato, Giapponese, Arabo, Hindi.
+**Lingue di lancio:** Italiano, Inglese, Tedesco, Francese, Spagnolo, Portoghese, Cinese semplificato, Giapponese, Arabo, Turco.
 
 **Motivazione:**
 - Le 10 lingue coprono oltre l'80% del traffico web mondiale
-- Hindi aggiunto per il bacino di utenza (600M+ parlanti)
+- Turco aggiunto per la rilevanza del mercato di riferimento (cliente iniziale Onur) e la dimensione del bacino (85M+ parlanti)
 - Arabo richiede attenzione specifica per il layout RTL nell'export Excel
 - Lingue aggiuntive arriveranno nelle milestone successive su richiesta della community
 
@@ -453,3 +453,328 @@ constructor(filePath = path.resolve(process.cwd(), 'seen_firms.json'))
 **Recovery da file corrotto:**
 - JSON malformato o struttura non valida (`seen` non è un array) → warning su logger, riparte da struttura vuota
 - I dati successivi vengono scritti correttamente — nessuna perdita di stato futuro
+
+---
+
+## DTR-025 — `excel.json`: configurazione colonne e sheet
+
+**Data:** 2026-06-10
+**Stato:** Accettata — da implementare in M4
+
+**Decisione:** Il comportamento dell'export Excel è governato da un file di configurazione dedicato `excel.json`, separato da `config.json`. Definisce quali colonne sono visibili e quali sheet opzionali sono abilitati.
+
+**Struttura:**
+```json
+{
+  "columns": {
+    "place_id":     false,
+    "name":         true,
+    "category":     true,
+    "city":         true,
+    "country":      true,
+    "address":      true,
+    "phone":        true,
+    "website":      true,
+    "rating":       true,
+    "review_count": true,
+    "maps_url":     false,
+    "first_seen":   false
+  },
+  "include_email_templates": true
+}
+```
+
+**Campi obbligatori (non disabilitabili):** `name`, `category`, `city`, `address`. Se un campo obbligatorio viene impostato a `false`, `ExcelExporter` lancia un errore descrittivo invece di generare un file privo di significato.
+
+**Ordine colonne:** l'ordine delle chiavi in `columns` determina l'ordine delle colonne nel foglio — nessun hardcode nell'exporter.
+
+**Motivazione:**
+- Onur deve poter nascondere colonne tecniche (`place_id`, `maps_url`) senza modificare il codice
+- La configurabilità via file evita di dover rilasciare una nuova versione per cambiare il layout
+- La separazione da `config.json` mantiene la configurazione operativa distinta da quella di presentazione
+- Coerente con il principio di responsabilità unica già applicato a `seen_firms.json` (DTR-021)
+
+**Alternative valutate:**
+- Parametri nel costruttore di `ExcelExporter`: scartato — non persistibile, non modificabile dall'utente finale
+- Colonne sempre tutte presenti: scartato — `place_id` e `maps_url` sono rumore per un utente non tecnico
+
+---
+
+## DTR-026 — Sheet 2 (Email Templates): feature configurabile e seme del pannello email M12
+
+**Data:** 2026-06-10
+**Stato:** Accettata — da implementare in M4
+
+**Decisione:** Lo Sheet 2 "Email Templates" è una feature opzionale controllata da `excel.json → include_email_templates`. Genera una riga per ogni azienda con oggetto e corpo email precompilati tramite Handlebars, pronti da copiare nel client email dell'utente.
+
+**Struttura colonne Sheet 2:**
+```
+name | category | city | email_subject | email_body
+```
+`name`, `category`, `city` sono colonne di contesto — identificano l'azienda senza dover saltare tra fogli. Non si replicano tutti i campi dello Sheet 1.
+
+**Template via Handlebars — chiavi i18n:**
+```json
+"email_subject_template": "Partnership opportunity — {{name}}",
+"email_body_template":    "Dear {{name}},\n\nI noticed your business in {{city}} and would love to connect.\n\nBest regards"
+```
+Variabili disponibili: tutti i campi di `Business` — `{{name}}`, `{{city}}`, `{{category}}`, `{{address}}`, `{{website}}`.
+
+**Testo multiriga:** `wrapText: true` sull'alignment della colonna `email_body` — il `\n` nel template diventa a-capo visibile in Excel.
+
+**Connessione con la roadmap:**
+Questo sheet è il seme del pannello di gestione email di M12. I template già strutturati in M4 eviteranno un refactor quando in M12 si aggiungerà l'invio diretto con tracciamento stato (inviata / risposto / ignorata).
+
+**Motivazione:**
+- Strumento di produttività immediata per Onur senza alcuna automazione — zero rischio
+- Configurabile: chi non lo vuole lo disabilita in `excel.json`
+- Anticipa la struttura dati di M12 a costo zero
+
+---
+
+## DTR-027 — `translate.ts`: utility i18n condivisa con fallback a cascata
+
+**Data:** 2026-06-10
+**Stato:** Accettata — da implementare in M4
+
+**Decisione:** La funzione di traduzione viene estratta in un modulo condiviso `src/i18n/translate.ts`, usato da tutti i moduli che necessitano di stringhe localizzate (`ExcelExporter`, `MailService`, `Scheduler`).
+
+**Implementazione:**
+```typescript
+export function t(
+  key: string,
+  i18n: Record<string, string>,
+  fallback: Record<string, string>
+): string {
+  return i18n[key] ?? fallback[key] ?? key;
+}
+```
+
+**Tre livelli di fallback:**
+1. Lingua attiva (`i18n`)
+2. `en.json` come fallback universale (`fallback`)
+3. La chiave stessa come ultima istanza — almeno si vede cosa manca invece di stringa vuota
+
+**Motivazione:**
+- Evita la duplicazione della logica di fallback in ogni modulo
+- Il terzo livello (chiave come fallback) rende immediatamente visibili le chiavi mancanti in fase di sviluppo e QA
+- Coerente con il principio DRY — una sola implementazione, testata una volta sola
+- Prerequisito per M8 (i18n completa) dove verrà aggiunto un test automatico che verifica la presenza di ogni chiave in ogni file lingua
+
+**Caricamento i18n:** ogni modulo riceve il dizionario già caricato come parametro — `translate.ts` non carica file, solo traduce. Responsabilità di carico separata, testabilità massima.
+
+---
+
+## DTR-028 — Roadmap post v1.0.0 approvata
+
+**Data:** 2026-06-10
+**Stato:** Accettata (decisione di business e architettura)
+
+**Decisione:** La roadmap delle milestone successive alla prima consegna pubblica (v1.0.0) è approvata nella seguente struttura:
+
+**v1.0.0 — Consegna a Onur + pubblicazione Softonic**
+
+| Milestone | Contenuto | Stato |
+|---|---|---|
+| M1 | Scaffold e configurazione | ✅ Completata |
+| M2 | Google Places Fetcher | ✅ Completata |
+| M3 | DedupService | ✅ Completata |
+| M4 | Excel Export | 🔧 In sviluppo |
+| M5 | MailService | ⏳ |
+| M6 | Scheduler + daemon | ⏳ |
+
+**v1.1.0 — Primo aggiornamento post-lancio**
+
+| Milestone | Contenuto |
+|---|---|
+| M7 | REST API — bridge Node.js ↔ GUI JavaFX (Express porta 3847) |
+| M8 | i18n completa — verifica tutte le chiavi in tutte le lingue, test automatici |
+| M9 | Packaging e documentazione — README, CHANGELOG, release Softonic |
+
+**v1.2.0**
+
+| Milestone | Contenuto |
+|---|---|
+| M10 | GUI JavaFX + ForgeUI — dashboard, wizard installazione, form config |
+
+**v1.3.0**
+
+| Milestone | Contenuto |
+|---|---|
+| M11 | SQLite + storico discovery — migrazione da `seen_firms.json`, statistiche, vista storica GUI |
+
+**v1.4.0**
+
+| Milestone | Contenuto |
+|---|---|
+| M12 | Pannello gestione email — selezione aziende, invio diretto, tracciamento stato (prerequisito: M10 + M11) |
+
+**v2.0.0**
+
+| Milestone | Contenuto |
+|---|---|
+| M13 | Arricchimento dati — popolamento `Metadata[]` con email, LinkedIn, ad_budget da sorgenti esterne |
+| M14 | Multi-utente e licenza Pro — gestione account, attivazione freemium €3,99/mese dal mese 2 |
+
+**Motivazione:**
+- La roadmap sequenzia correttamente le dipendenze architetturali: M7 (REST API) prerequisito di M10 (GUI), M10 + M11 prerequisiti di M12 (pannello email)
+- Ogni versione è autonomamente rilasciabile e consegnabile
+- Il Sheet 2 di M4 (DTR-026) è il seme strutturale di M12 — anticipazione a costo zero
+- I `Metadata[]` di M2 (DTR-009) sono il seme strutturale di M13 — stessa filosofia
+
+---
+
+## DTR-029 — Policy: file di configurazione separati per dominio
+
+**Data:** 2026-06-10
+**Stato:** Accettata — policy trasversale a tutte le milestone
+
+**Decisione:** Ogni dominio funzionale che richiede configurazione persistente ha il proprio file dedicato. Nessun file di configurazione aggrega responsabilità di domini diversi.
+
+**File di configurazione del progetto:**
+
+| File | Dominio | Gitignored |
+|---|---|---|
+| `config.json` | Configurazione operativa (API key, SMTP, schedule, lingue) | ✅ |
+| `config.example.json` | Template committato senza segreti | ❌ |
+| `excel.json` | Configurazione presentazione export Excel (colonne, sheet) | ❌ |
+| `seen_firms.json` | Storico deduplicazione (place_id già inviati) | ✅ |
+
+**Regola operativa:** quando emerge la necessità di configurare un nuovo dominio funzionale, si crea un file dedicato — non si estende `config.json`. Il nuovo file segue il pattern: file example committato, file reale gitignored se contiene dati sensibili o di stato.
+
+**Motivazione:**
+- Separazione netta delle responsabilità — ogni file ha una sola ragione per cambiare
+- `config.json` rimane leggibile e non cresce indefinitamente
+- File separati possono essere versionati, committati o gitignored in modo indipendente in base alla loro natura
+- Coerente con le scelte già prese: `seen_firms.json` separato da `config.json` (DTR-021), `excel.json` separato da `config.json` (DTR-025)
+- Facilita il wizard M10+: ogni pannello di configurazione della GUI mappa su un file specifico
+
+---
+
+## DTR-030 — Separazione codice/asset: `assets/i18n/` per le localizzazioni
+
+**Data:** 2026-06-10
+**Stato:** Accettata — implementata in M4
+
+**Decisione:** I file di localizzazione JSON (`en.json`, `it.json`, …) risiedono in `assets/i18n/`. Il codice di traduzione (`translate.ts`) rimane in `src/i18n/`. La cartella `assets/` raccoglie tutto ciò che non è codice TypeScript né configurazione di root.
+
+**Struttura:**
+```
+assets/
+└── i18n/
+    ├── en.json   ← lingua di riferimento e fallback universale
+    ├── it.json
+    ├── tr.json
+    └── ...       ← tutti i file lingua
+
+src/
+└── i18n/
+    └── translate.ts   ← codice — utility t() con fallback a cascata
+```
+
+**Motivazione:**
+- Principio trasversale consolidato nel web development: localizzazioni, immagini, CSS e tutto ciò che non è codice o configurazione appartiene ad `assets/`
+- Separazione netta tra artefatti compilabili (`src/`) e risorse statiche (`assets/`)
+- Facilita la sostituzione o l'aggiornamento di un file lingua senza toccare il codice
+- Coerente con la convenzione già adottata per `templates/email.html`
+
+**Regola operativa:** qualsiasi risorsa statica non-codice introdotta nelle milestone successive segue lo stesso principio e va posizionata sotto `assets/`.
+
+---
+
+## DTR-031 — Import dinamici JSON: uso esplicito di `.default`
+
+**Data:** 2026-06-10
+**Stato:** Accettata — lezione appresa in M4
+
+**Decisione:** Gli import dinamici di file JSON (`await import('…/file.json')`) devono sempre accedere alla proprietà `.default` per estrarre il contenuto tipizzato correttamente:
+
+```typescript
+// Corretto
+const en = (await import('../../assets/i18n/en.json')).default;
+
+// Errato — genera ts(2352): proprietà 'default' incompatibile con Record<string, string>
+const en = await import('../../assets/i18n/en.json');
+```
+
+**Motivazione:**
+- TypeScript con `esModuleInterop: true` e `resolveJsonModule: true` wrappa il contenuto JSON in un oggetto con chiave `default`
+- Senza `.default` il tipo risultante include la proprietà `default` extra, incompatibile con `Record<string, string>` e simili indici generici
+- Il compilatore segnala l'errore come `ts(2352)` — rilevato in M4 sui test di `translate.test.ts`
+
+**Aggiornamento DTR-008 (Testing):** i test che importano dinamicamente file JSON devono usare `.default`. Lezione aggiunta alla nota sulle pratiche Vitest.
+
+---
+
+## DTR-032 — ExcelExporter: colonne configurabili con ordine da `excel.json`
+
+**Data:** 2026-06-10
+**Stato:** Accettata — implementata in M4
+
+**Decisione:** Le colonne del Sheet 1 sono determinate esclusivamente da `excel.json`. L'ordine delle chiavi nel JSON determina l'ordine delle colonne nel foglio. Nessuna lista di colonne è hardcodata in `ExcelExporter.ts`.
+
+**Implementazione:**
+```typescript
+const activeCols = Object.entries(this.excelConfig.columns)
+  .filter(([, enabled]) => enabled)
+  .map(([key]) => key);
+```
+
+**Motivazione:**
+- Onur può riordinare le colonne modificando `excel.json` senza toccare il codice
+- `Object.entries()` preserva l'ordine di inserimento delle chiavi — comportamento garantito in ES2015+
+- La mappatura `colKey → fieldName` e `colKey → i18nKey` è dichiarativa e centralizzata nelle costanti `COL_TO_FIELD` e `COL_TO_I18N_KEY`
+
+---
+
+## DTR-033 — ExcelExporter: auto-width manuale post-inserimento
+
+**Data:** 2026-06-10
+**Stato:** Accettata — implementata in M4
+
+**Decisione:** ExcelJS non dispone di un auto-fit nativo. Le larghezze delle colonne vengono calcolate manualmente dopo l'inserimento di tutti i dati, con una passata finale su ogni colonna:
+
+```typescript
+col.width = Math.max(MIN_COL_WIDTH, headerLen, maxDataLen) + COL_PADDING;
+```
+
+**Parametri:**
+- `MIN_COL_WIDTH = 10` — larghezza minima garantita per colonne con dati brevi o vuoti
+- `COL_PADDING = 2` — margine visivo aggiuntivo
+- Il calcolo considera header e tutti i valori dati — prende il massimo
+
+**Motivazione:**
+- Il calcolo deve avvenire dopo l'inserimento dei dati — non è possibile farlo in anticipo
+- La larghezza minima evita colonne troppo strette su dati opzionali (es. `phone`, `website`)
+- Approccio consolidato nell'ecosistema ExcelJS — nessuna libreria di terze parti necessaria
+
+---
+
+## DTR-034 — ExcelExporter: Handlebars compile una volta per template
+
+**Data:** 2026-06-10
+**Stato:** Accettata — implementata in M4
+
+**Decisione:** I template Handlebars per Sheet 2 vengono compilati una sola volta prima del loop sui business, non ad ogni iterazione:
+
+```typescript
+// Corretto — compilazione fuori dal loop
+const subjectTemplate = Handlebars.compile(tr('email_subject_template'));
+const bodyTemplate    = Handlebars.compile(tr('email_body_template'));
+
+businesses.forEach(business => {
+  const subject = subjectTemplate(business);
+  const body    = bodyTemplate(business);
+  // ...
+});
+
+// Errato — compilazione dentro il loop, O(n) compilazioni inutili
+businesses.forEach(business => {
+  const subject = Handlebars.compile(tr('email_subject_template'))(business);
+});
+```
+
+**Motivazione:**
+- `Handlebars.compile()` esegue il parsing e la compilazione del template — operazione non banale
+- Con N aziende nel batch, compilare dentro il loop moltiplica il costo per N senza alcun beneficio
+- Il template non cambia tra un business e l'altro — la funzione compilata è riutilizzabile

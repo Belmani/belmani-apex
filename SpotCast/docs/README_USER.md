@@ -233,7 +233,7 @@ node SpotCast.js --reset
 | `zh`   | Cinese (semplificato) |
 | `ja`   | Giapponese            |
 | `ar`   | Arabo                 |
-| `hi`   | Turco                 |
+| `tr`   | Turco                 |
 
 ---
 
