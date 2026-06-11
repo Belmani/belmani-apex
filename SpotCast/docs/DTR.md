@@ -778,3 +778,206 @@ businesses.forEach(business => {
 - `Handlebars.compile()` esegue il parsing e la compilazione del template — operazione non banale
 - Con N aziende nel batch, compilare dentro il loop moltiplica il costo per N senza alcun beneficio
 - Il template non cambia tra un business e l'altro — la funzione compilata è riutilizzabile
+
+---
+
+## DTR-035 — MailService: primo destinatario in `to`, tutti gli altri in `bcc`
+
+**Data:** 2026-06-11
+**Stato:** Accettata — da implementare in M5
+
+**Decisione:** `MailService` invia un'unica email con il primo indirizzo di `config.email_to` in `to` e tutti gli altri in `bcc`. I destinatari non si vedono tra loro.
+
+**Implementazione:**
+```typescript
+to:  recipients[0],
+bcc: recipients.slice(1).join(', '),
+```
+Se `email_to` ha un solo destinatario, `bcc` è stringa vuota — Nodemailer lo gestisce correttamente senza errori.
+
+**Motivazione:**
+- Protegge la privacy dei destinatari — default più sicuro per uno strumento distribuito a terzi
+- SpotCast può essere rivenduto o usato in team — esporre gli indirizzi tra loro è inaccettabile
+- Zero complessità aggiuntiva rispetto all'alternativa `to` multiplo
+- Comportamento da documentare nel README utente — non ovvio per chi configura `email_to`
+
+**Alternative valutate:**
+- Tutti in `to`: scartato — espone gli indirizzi tra i destinatari
+- Email separata per destinatario: scartato — overkill, N chiamate SMTP invece di una
+
+---
+
+## DTR-036 — MailService: wrapping errori SMTP asincroni
+
+**Data:** 2026-06-11
+**Stato:** Accettata — da implementare in M5
+
+**Decisione:** `MailService.send()` wrappa `transporter.sendMail()` in `try/catch`, logga l'errore con Winston, e **rilancia** — non decide autonomamente se il processo deve terminare.
+
+```typescript
+try {
+  await transporter.sendMail(mailOptions);
+  logger.info(`Email sent to ${config.email_to.length} recipient(s)`);
+} catch (err) {
+  logger.error(`SMTP error: ${(err as Error).message}`);
+  throw err; // rilancia — la pipeline in M6 decide
+}
+```
+
+**Motivazione:**
+- `sendMail()` restituisce una Promise — l'errore è asincrono. Senza `try/catch` diventa `UnhandledPromiseRejection` che in Node.js 20+ termina il processo senza log utile
+- `MailService` è stupido per design — sa solo mandare email. Non ha il contesto per decidere se un errore SMTP è fatale per il run
+- La pipeline in M6 cattura il `throw` e decide: logga il fallimento del run, ma il processo daemon rimane attivo per il run successivo
+
+**Contratto:** logga e rilancia. Non inghiotte mai.
+
+---
+
+## DTR-037 — i18n: utility `format.ts` per date e numeri localizzati
+
+**Data:** 2026-06-11
+**Stato:** Accettata — da implementare in M5 (prerequisito bloccante)
+
+**Decisione:** La formattazione di date e numeri secondo la lingua attiva è estratta in `src/i18n/format.ts`, con tre funzioni separate per tre casi d'uso distinti:
+
+```typescript
+formatDate(date: Date, i18n: Record<string, unknown>): string
+// Legge i18n.formats.date — es. "DD/MM/YYYY" per IT, "YYYY年MM月DD日" per ZH
+
+formatInteger(n: number, i18n: Record<string, unknown>): string
+// Usa thousands_separator — per count, totali, contatori
+// Output: "1.234" (IT/DE) | "1,234" (EN) | "1 234" (FR)
+// Nessun decimale — non ha senso dire "trovate 32.00 nuove attività"
+
+formatDecimal(n: number, i18n: Record<string, unknown>): string
+// Usa decimal_separator e thousands_separator — per rating, valori float
+// Output: "4,5" (IT) | "4.5" (EN)
+// Rimuove zero trailing — "4.0" → "4"
+```
+
+**Fallback:** se `i18n.formats` è assente o incompleto, comportamento EN di default (`YYYY-MM-DD`, `.` decimale, `,` migliaia).
+
+**Motivazione:**
+- Senza formattazione localizzata l'email di Onur mostra "10/06/2026" in italiano e "2026-06-10" in inglese — incoerente
+- La separazione `formatInteger` / `formatDecimal` evita output assurdi come "trovate 32.00 nuove attività"
+- `format.ts` è la naturale estensione di `translate.ts` — stesso modulo `src/i18n/`, stessa filosofia (riceve dizionario già caricato, non tocca il filesystem)
+
+**Nota `formats` come oggetto:** `i18n.formats` è un oggetto annidato, non una stringa — `translate.ts` non lo gestisce. `format.ts` lo legge direttamente tramite accesso tipizzato.
+
+---
+
+## DTR-038 — MailService: template HTML con Handlebars, `\n` → `<br>` sul body i18n
+
+**Data:** 2026-06-11
+**Stato:** Accettata — da implementare in M5
+
+**Decisione:** Il corpo email è composto da due layer separati:
+
+1. **Body testuale** (da i18n): stringa `email_body` compilata con Handlebars (`{{date}}`, `{{count}}`, `{{categories}}`, `{{cities}}`), poi `\n` sostituiti con `<br>` — produce HTML inline leggibile
+2. **Wrapper HTML** (`templates/email.html`): file statico con struttura visiva (font, colori, spaziatura), riceve `{{{body}}}` come variabile Handlebars (triple-stache per non escappare l'HTML già prodotto)
+
+**Variabili disponibili nel wrapper:**
+```
+{{date}}        — data run formattata con formatDate()
+{{count}}       — numero aziende formattato con formatInteger()
+{{categories}}  — join ", " delle categorie dalla config
+{{cities}}      — join ", " delle città dalla config
+{{{body}}}      — corpo i18n con <br>, iniettato senza escaping
+```
+
+**Motivazione:**
+- Separazione contenuto/presentazione: il testo cambia per lingua, il wrapper HTML è invariante
+- `\n` → `<br>` applicato al body i18n, non nel template — mantiene i file JSON leggibili come testo normale
+- Triple-stache `{{{body}}}` necessario perché il body contiene già tag `<br>` — il double-stache `{{body}}` li escaperebbe in `&lt;br&gt;`
+- Handlebars è già nel progetto (M4 ExcelExporter) — zero dipendenze nuove
+
+**Alternativa scartata — MJML:** overkill per un'email transazionale semplice con tre variabili. Risolve problemi di compatibilità cross-client che SpotCast non ha (Onur usa probabilmente sempre lo stesso client email).
+
+**Alternativa scartata — React Email:** introduce React come dipendenza in un backend Node.js puro. Il costo è alto, il beneficio è zero per questo caso d'uso.
+
+---
+
+## DTR-039 — i18n: tipo `Record<string, unknown>` per dizionari con oggetti annidati
+
+**Data:** 2026-06-11
+**Stato:** Accettata — lezione appresa in M5
+
+**Decisione:** I dizionari i18n devono essere tipizzati come `Record<string, unknown>` in tutta la codebase — non `Record<string, string>`. Dove il valore è certamente una stringa, si usa il cast esplicito `as string`.
+
+```typescript
+// Corretto
+export function t(
+  key: string,
+  i18n: Record<string, unknown>,
+  fallback: Record<string, unknown>
+): string {
+  return (i18n[key] as string) || (fallback[key] as string) || key;
+}
+
+// Errato — incompatibile con oggetti annidati come formats
+export function t(key: string, i18n: Record<string, string>, ...): string
+```
+
+**Motivazione:**
+- L'aggiunta di `formats` come oggetto annidato in M4 ha reso `Record<string, string>` incompatibile con la struttura reale dei file i18n
+- TypeScript segnala `ts(2352)` quando si tenta di castare un tipo con proprietà non-stringa a `Record<string, string>`
+- `Record<string, unknown>` è il tipo corretto per qualsiasi dizionario JSON con struttura eterogenea
+- Il cast `as string` nei punti di utilizzo è esplicito e controllato — non nasconde bug
+
+**Impatto:** aggiornati `translate.ts`, `translate.test.ts` e tutti i punti di utilizzo.
+
+---
+
+## DTR-040 — Testing: variabili fixture che collidono con funzioni Vitest
+
+**Data:** 2026-06-11
+**Stato:** Accettata — lezione appresa in M5
+
+**Decisione:** Le variabili fixture nei test non devono avere lo stesso nome delle funzioni importate da Vitest (`it`, `describe`, `expect`, `vi`, `beforeEach`, `afterEach`). Convenzione adottata: suffisso `_` per le fixture che collidono.
+
+```typescript
+// Errato — 'it' è una funzione Vitest, non una variabile
+const it = { formats: { date: 'DD/MM/YYYY' } };
+
+// Corretto
+const it_ = { formats: { date: 'DD/MM/YYYY' } };
+```
+
+**Motivazione:**
+- Vitest importa `it` come funzione globale quando `globals: true` è attivo in `vitest.config.ts`
+- Una variabile locale con lo stesso nome maschera la funzione globale — i test falliscono con `TypeError: it is not a function`
+- Il suffisso `_` è una convenzione consolidata in TypeScript per evitare conflitti con keyword e identifier riservati
+
+**Aggiornamento DTR-008 (Testing):** aggiunta lezione su naming delle fixture.
+
+---
+
+## DTR-041 — jsonTransport Nodemailer: struttura payload per le asserzioni di test
+
+**Data:** 2026-06-11
+**Stato:** Accettata — lezione appresa in M5
+
+**Decisione:** `jsonTransport` di Nodemailer serializza gli indirizzi come oggetti `{address, name}` e gli allegati come `content` (buffer), non come `path`. I test devono assertire sulla struttura reale del payload, non su rappresentazioni stringa.
+
+**Struttura payload jsonTransport:**
+```typescript
+// Indirizzi — NON stringhe flat
+msg.to   // → Array<{ address: string; name: string }>
+msg.bcc  // → Array<{ address: string; name: string }>
+msg.from // → { address: string; name: string }
+
+// Allegati — content risolto, path non presente
+msg.attachments // → Array<{ filename: string; content: Buffer }>
+
+// Accesso corretto
+const to = msg.to as Array<{ address: string }>;
+expect(to[0].address).toBe('primary@test.com');
+
+// Accesso errato — String() su un oggetto produce '[object Object]'
+expect(String(msg.to)).toContain('primary@test.com'); // FALLISCE
+```
+
+**Motivazione:**
+- Il formato è documentato nel codice sorgente di Nodemailer ma non esplicitamente nella documentazione pubblica
+- Scoperto empiricamente in M5 — 4 test falliti al primo run per questo motivo
+- La conoscenza è ora tracciata per evitare lo stesso problema in future suite che usano `jsonTransport`
