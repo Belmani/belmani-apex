@@ -981,3 +981,122 @@ expect(String(msg.to)).toContain('primary@test.com'); // FALLISCE
 - Il formato è documentato nel codice sorgente di Nodemailer ma non esplicitamente nella documentazione pubblica
 - Scoperto empiricamente in M5 — 4 test falliti al primo run per questo motivo
 - La conoscenza è ora tracciata per evitare lo stesso problema in future suite che usano `jsonTransport`
+ ---
+## DTR-042 — Sostituzione GoogleFetcher con HereFetcher (HERE Browse API)
+
+**Data:** 2026-06-13
+**Stato:** Accettata — implementata in M7
+
+**Decisione:** `GoogleFetcher` viene deprecato e sostituito da `HereFetcher` basato su HERE Browse API. `GoogleFetcher.ts` rimane nel repository come riferimento storico ma non viene più istanziato dalla pipeline.
+
+**Motivazione:**
+- Google Places Text Search ha un limite strutturale di 20 risultati per query, 60 con paginazione — non aggirabile lato client
+- In test end-to-end su Tolmezzo/Socchieve con `results_per_run: 10` globale, la prima categoria esauriva il budget nascondendo le altre
+- HERE Browse API supporta paginazione reale con `offset`, nessun limite artificiale per query
+- HERE ha copertura capillare Europa con dati stabili garantiti da contratti enterprise
+- Approccio geografico (lat/lng + raggio + codice categoria) più preciso della query testuale
+- Architettura compatibile con Overture Maps in M14+ — stesso modello dati
+
+**Impatto:** solo `SpotCast.ts` cambia la riga di import. Il resto della pipeline è invariato.
+
+**Alternative valutate:**
+- Paginazione Google Places con `next_page_token`: cap di 60 risultati totali rimane, delay obbligatorio tra le pagine, costo API triplicato — scartato
+- Selenium/Playwright su Google Search: fattibilità stimata 40%, manutenzione continua contro anti-bot Google, guerra di logoramento — scartato
+
+---
+
+## DTR-043 — `categories` in config.json: label testuali inglesi → codici HERE tramite HereCategoryMap
+
+**Data:** 2026-06-13
+**Stato:** Accettata — implementata in M7
+
+**Decisione:** Le categorie in `config.json` rimangono stringhe testuali in inglese (`"Bar"`, `"Gym"`, `"Lawyer"`). La conversione verso i codici HERE avviene in `ConfigLoader.ts` tramite `HereCategoryMap.ts` prima che i dati raggiungano `HereFetcher`. `HereFetcher` riceve solo codici già validati — non conosce le label.
+
+**Struttura `HereCategoryMap.ts`:**
+```typescript
+export const HERE_CATEGORY_MAP: Record<string, string> = {
+  "Bar":         "100-1000-0000",
+  "Restaurant":  "100-1100-0000",
+  "Gym":         "400-4100-0141",
+  "Lawyer":      "700-7400-0246",
+  "Plumber":     "700-7400-0249",
+  "Locksmith":   "700-7400-0116",
+  // estensibile — aggiungere una categoria = aggiungere una riga
+};
+```
+
+**Comportamento su categoria non riconosciuta:** WARN nel log + skip della categoria. Se tutte le categorie sono invalide → errore fatale con `fatal()` e exit code 1.
+
+**Motivazione:**
+- L'utente finale non deve conoscere codici numerici HERE
+- Responsabilità separata: `ConfigLoader` valida e traduce, `HereFetcher` esegue
+- Estensibile senza modificare `HereFetcher`
+
+**Roadmap i18n (post-M7):** le label in config resteranno in inglese come lingua comune. A tendere, la pipeline tradurrà le label i18n attive in inglese prima della conversione — nessuna modifica alla mappa necessaria.
+
+---
+
+## DTR-044 — `results_per_run` rimosso, paginazione illimitata con HERE
+
+**Data:** 2026-06-13
+**Stato:** Accettata — breaking change in M7
+
+**Decisione:** Il campo `results_per_run` viene rimosso da `config.json` e da `ConfigLoader`. `HereFetcher` pagina automaticamente fino ad esaurimento dei risultati HERE per ogni combinazione categoria×città.
+
+**Motivazione:**
+- `results_per_run` come cap globale nascondeva categorie: la prima categoria esauriva il budget prima che le altre venissero interrogate — problema riscontrato in test end-to-end M6
+- HERE Browse API non ha limiti arbitrari — la paginazione è reale e deterministica
+- L'utente finale vuole tutte le attività disponibili, non un sottoinsieme arbitrario
+
+**Breaking change:** `config.json` esistenti con `results_per_run` producono un WARN al caricamento. Il campo viene ignorato silenziosamente dopo il warning.
+
+---
+
+## DTR-045 — Geocoding con cache su file `geocache.json`
+
+**Data:** 2026-06-13
+**Stato:** Accettata — implementata in M7
+
+**Decisione:** Le coordinate geografiche delle città vengono cachate in `geocache.json` nella root del progetto. La cache viene consultata prima di ogni chiamata HERE Geocoding API. I risultati nuovi vengono scritti nella cache immediatamente dopo il fetch.
+
+**Struttura:**
+```json
+{
+  "Berlin, Germany":        { "lat": 52.5200, "lng": 13.4050 },
+  "Munich, Germany":        { "lat": 48.1351, "lng": 11.5820 },
+  "Niedernhausen, Germany": { "lat": 50.1731, "lng":  8.3197 }
+}
+```
+
+**`geocache.json` viene committato nel repository.** Non contiene segreti. Pre-caricato con le principali città europee — migliora l'esperienza out-of-the-box.
+
+**Motivazione:**
+- Le coordinate geografiche non cambiano nel tempo
+- Evita chiamate API ridondanti ad ogni run per le stesse città
+- Il file cresce organicamente con le città usate dagli utenti
+
+---
+
+## DTR-046 — Roadmap M13: Handelsregister tedesco come sorgente lead B2B
+
+**Data:** 2026-06-13
+**Stato:** Pianificata (M13)
+
+**Decisione:** In M13 verrà implementato un connettore per l'Handelsregister tedesco (registro imprese pubblico) come sorgente primaria di lead B2B per il mercato tedesco.
+
+**Motivazione:**
+- Ogni nuova GmbH registrata ha depositato almeno 25.000€ di capitale sociale — lead qualificati per definizione
+- I dati sono pubblici, gratuiti e stabili — zero costi API, nessun rischio di ban
+- SpotCast intercetta l'azienda nel momento esatto della nascita legale, settimane prima che abbia una scheda Google Maps o HERE
+- Risponde esplicitamente al requisito di Benjamin: lead ad alta capitalizzazione appena emersi
+
+**Architettura prevista:**
+```
+Feed giornaliero Handelsregister
+  → parser iscrizioni nuove GmbH/UG
+  → HERE Geocoding per coordinate
+  → modello Business esistente
+  → pipeline invariata (dedup → excel → email)
+```
+
+**Alternativa scartata — Selenium/Playwright su Google Search:** fattibilità 40%, manutenzione continua contro sistemi anti-bot Google, proxy rotativi ~20-50€/mese, insostenibile a lungo termine.
